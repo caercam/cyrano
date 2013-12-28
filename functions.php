@@ -1,5 +1,97 @@
 <?php
 
+/**
+ * Sets up theme defaults and registers the various WordPress features that
+ * Cyrano supports.
+ *
+ * @uses load_theme_textdomain() For translation/localization support.
+ * @uses add_editor_style() To add Visual Editor stylesheets.
+ * @uses add_theme_support() To add support for automatic feed links, post
+ * formats, and post thumbnails.
+ * @uses register_nav_menu() To add support for a navigation menu.
+ * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
+ *
+ * @since Cyrano 1.0
+ *
+ * @return void
+ */
+function cyrano_setup() {
+	/*
+	 * Makes Twenty Thirteen available for translation.
+	 *
+	 * Translations can be added to the /languages/ directory.
+	 * If you're building a theme based on Twenty Thirteen, use a find and
+	 * replace to change 'cyrano' to the name of your theme in all
+	 * template files.
+	 */
+	load_theme_textdomain( 'cyrano', get_template_directory() . '/languages' );
+
+	/*
+	 * This theme styles the visual editor to resemble the theme style,
+	 * specifically font, colors, icons, and column width.
+	 */
+	//add_editor_style( array( 'css/editor-style.css', 'fonts/genericons.css', twentythirteen_fonts_url() ) );
+
+	// Adds RSS feed links to <head> for posts and comments.
+	add_theme_support( 'automatic-feed-links' );
+
+	// Switches default core markup for search form, comment form, and comments
+	// to output valid HTML5.
+	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
+
+	/*
+	 * This theme supports all available post formats by default.
+	 * See http://codex.wordpress.org/Post_Formats
+	 */
+	add_theme_support( 'post-formats', array(
+		'aside', 'audio', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video'
+	) );
+
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menu( 'primary', __( 'Navigation Menu', 'cyrano' ) );
+
+	/*
+	 * This theme uses a custom image size for featured images, displayed on
+	 * "standard" posts and pages.
+	 */
+	add_theme_support( 'post-thumbnails' );
+
+	// This theme uses its own gallery styles.
+	add_filter( 'use_default_gallery_style', '__return_false' );
+}
+add_action( 'after_setup_theme', 'twentythirteen_setup' );
+
+/**
+ * Registers two widget areas.
+ *
+ * @since Cyrano 1.0
+ *
+ * @return void
+ */
+function cyrano_widgets_init() {
+
+	register_sidebar( array(
+		'name'          => __( 'Main Widget Area', 'cyrano' ),
+		'id'            => 'sidebar-1',
+		'description'   => __( 'Appears in the footer section of the site.', 'cyrano' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	) );
+
+	register_sidebar( array(
+		'name'          => __( 'Secondary Widget Area', 'cyrano' ),
+		'id'            => 'sidebar-2',
+		'description'   => __( 'Appears on posts and pages in the sidebar.', 'cyrano' ),
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+	) );
+}
+add_action( 'widgets_init', 'cyrano_widgets_init' );
+
 function cyrano_scripts() {
 
 	wp_register_style( 'cyrano', get_stylesheet_uri(), array(), false, 'all' );
@@ -130,7 +222,7 @@ function cyrano_paging_nav() {
 						<div class="recent-posts"><?php previous_posts_link( __( '<span class="meta-nav">&larr;</span> Newer posts', 'cyrano' ) ); ?></div><?php endif; ?>
 <?php if ( get_next_posts_link() ) : ?>
 						<div class="older-posts"><?php next_posts_link( __( 'Older posts <span class="meta-nav">&rarr;</span>', 'cyrano' ) ); ?></div><?php endif; ?>
-						<div class="page-number"><?php printf( __( 'Page %d of %d', 'cyrano' ), $wp_query->get('paged'), $wp_query->max_num_pages ) ?></div>
+						<div class="page-number"><?php printf( __( 'Page %d of %d', 'cyrano' ), ( $wp_query->get('paged') ? $wp_query->get('paged') : 1 ), $wp_query->max_num_pages ) ?></div>
 					</nav>
 					<div style="clear:both"></div>
 				</div>
@@ -149,26 +241,28 @@ function cyrano_post_cover( $post_id = null, $echo = true ) {
 	$t_id = get_post_thumbnail_id( $post_id );
 	$thumbnail = wp_get_attachment_image_src( $t_id, 'large' );
 
-	if ( ! $thumbnail )
-		return false;
-
-	$w = $thumbnail[1];
-	$h = $thumbnail[2];
-
-	$landscape = ( $w > $h );
-	$wide      = ( $w > ( 2 * $h ) );
-
-	if ( $wide ) {
-		$class = 'class="wide"';
-	}
-	else if ( $landscape ) {
-		$class = 'class="landscape"';
+	if ( ! $thumbnail ) {
+		$html = sprintf( '<img class="landscape" src="%s" width="896" height="480" alt="%s" />'."\n", get_template_directory_uri() . '/assets/img/default_cover.jpg', get_bloginfo('name') );
 	}
 	else {
-		$class = '';
-	}
+		$w = $thumbnail[1];
+		$h = $thumbnail[2];
 
-	$html = sprintf( '<img %s src="%s" width="%d" height="%d" alt="%s" />'."\n", $class, $thumbnail[0], $w, $h, get_the_title( $post_id ) );
+		$landscape = ( $w > $h );
+		$wide      = ( $w > ( 2 * $h ) );
+
+		if ( $wide ) {
+			$class = 'class="wide"';
+		}
+		else if ( $landscape ) {
+			$class = 'class="landscape"';
+		}
+		else {
+			$class = '';
+		}
+
+		$html = sprintf( '<img %s src="%s" width="%d" height="%d" alt="%s" />'."\n", $class, $thumbnail[0], $w, $h, get_the_title( $post_id ) );
+	}
 
 	if ( $echo )
 		echo $html;
