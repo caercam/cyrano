@@ -1,21 +1,36 @@
+/*
+Theme Name: Cyrano
+Theme URI: http://www.caercam.org/cyrano
+Description: Cyrano is a clean and simple, flat, blue oriented, responsive WordPress Theme
+Author: Charlie MERLAND
+Author URI: http://www.caercam.org/
+Version: 1.0.0
+Tags: one-columns, custom-background, custom-header, custom-menu, featured-images, sticky-post, translation-ready
+License: GNU General Public License v3
+License URI: http://www.opensource.org/licenses/gpl-license.php
+Text Domain: cyrano
+*/
+
+
+
 @font-face {
     font-family: 'entypo';
-    src: url('../fonts/entypo.eot');
-    src: url('../fonts/entypo.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/entypo.woff') format('woff'),
-         url('../fonts/entypo.ttf') format('truetype'),
-         url('../fonts/entypo.svg#entypo') format('svg');
+    src: url('assets/fonts/entypo.eot');
+    src: url('assets/fonts/entypo.eot?#iefix') format('embedded-opentype'),
+         url('assets/fonts/entypo.woff') format('woff'),
+         url('assets/fonts/entypo.ttf') format('truetype'),
+         url('assets/fonts/entypo.svg#entypo') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'entypo-social';
-    src: url('../fonts/entypo-social.eot');
-    src: url('../fonts/entypo-social.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/entypo-social.woff') format('woff'),
-         url('../fonts/entypo-social.ttf') format('truetype'),
-         url('../fonts/entypo-social.svg#entypo-social') format('svg');
+    src: url('assets/fonts/entypo-social.eot');
+    src: url('assets/fonts/entypo-social.eot?#iefix') format('embedded-opentype'),
+         url('assets/fonts/entypo-social.woff') format('woff'),
+         url('assets/fonts/entypo-social.ttf') format('truetype'),
+         url('assets/fonts/entypo-social.svg#entypo-social') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -45,6 +60,11 @@
     font-style: normal;
 }*/
 
+
+/*
+ * Basics
+ */
+
 * {
 	margin: 0;
 	outline: 0;
@@ -52,14 +72,12 @@
 }
 
 body {
-	background: url(../img/bg.png) center top;
+	background: url(assets/img/bg.png) center top;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
 	color: #222;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 100;
-}
-
-h1, h2, h3, h4, h5, h6 {
-	font-family: 'Open Sans', sans-serif;
 }
 
 a {
@@ -71,14 +89,165 @@ a:focus {
 	color: #fba452;
 }
 
+abbr,
+acronym {
+	border-bottom: 1px dotted;
+}
+
+blockquote {
+	border-left: 4px solid #ddd;
+	margin: 1.5em;
+	padding-left: 1em;
+}
+
+blockquote cite {
+	display: block;
+	font-size: 0.9em;
+	margin-top: 0.5em;
+	text-align: right;
+}
+
+code,
+pre,
+tt {
+	background: #e0e6ee;
+	border: 1px solid #c8cfda;
+	border-radius: 0.3em;
+	color: #283d5e;
+	padding: 0.25em;
+}
+
+dl {
+	line-height: 1.5em;
+	margin: 1em 0;
+}
+
+dl dt {
+	font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Open Sans', sans-serif;
+}
+
+p {
+	/*clear: both;*/
+}
+
+pre {
+	padding: 0.5em 0.75em;
+}
+
+q {
+	border-left: 2px solid #ddd;
+	padding: 0.25em 1em;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table th {
+	border-bottom: 2px solid #ccc;
+	padding: 0.25em 0.75em;
+}
+
+table td {
+	border-top: 1px solid #ccc;
+	padding: 0.25em 0.75em;
+}
+
+/* Clear */
+
+.clearfix:before,
+.clearfix:after,
+.post-content:after {
+	clear: both;
+	content: ' ';
+	display: block;
+}
+
+
+/* Images */
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wp-caption.alignleft {
+	margin: 0.25em 0.75em 0.25em 0;
+}
+
+.wp-caption.alignright {
+	margin: 0.25em 0 0.25em 0.75em;
+}
+
+img.alignright {
+	margin: 0.25em 0 0.25em 1.5em;
+}
+
+img.alignleft {
+	margin: 0.25em 1.5em 0.25em 0;
+}
+
+img.aligncenter {
+	margin: 0.25em auto;
+}
+
+img.alignnone {
+	margin: 0.25em 0;
+}
+
+.wp-caption {
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 0.25em;
+	max-width: 100%;
+	text-align: center;
+}
+
+.wp-caption.alignright,
+.wp-caption.alignleft {
+	margin: 0.5em 1em;
+}
+
+.wp-caption img {
+	border-radius: 0.25em 0.25em 0 0;
+	margin: 0.25em auto;
+}
+
+.wp-caption-text {
+	margin: 0em 0 0.5em 0 !important;
+	padding: 0 0.75em;
+}
+
+/*
+ * Wrapper
+ */
+
 .wrapper {
 	box-shadow: 0 0 10px #111;
 	margin: 0 auto;
 	max-width: 56em;
 }
 
+
+/*
+ * Header
+ */
+
 .site-header {
-	background: url(../img/header.jpg) center top no-repeat;
+	background: url(assets/img/header.jpg) center top no-repeat;
 	color: #fff;
 	height: 14em;
 	padding: 2em;
@@ -97,6 +266,11 @@ a:focus {
 	font-weight: 700;
 	text-transform: uppercase;
 }
+
+
+/*
+ * Menu
+ */
 
 .menu {
 	background: #fff;
@@ -146,6 +320,7 @@ a:focus {
 .menu ul li.menu-nav {
 	display: none;
 }
+
 
 /*
  * Menu Scroll
@@ -220,39 +395,134 @@ a:focus {
  */
 
 .main {
-	overflow: hidden;
 }
 
 .article {
 	background: #fff;
+	position: relative;
 }
 
+
+/*
+ * Featured Posts
+ */
+
+.featured-post {
+	background: #4C80A8;
+	bottom: 0;
+	color: #fff;
+	font-size: 0.8em;
+	font-weight: 600;
+	line-height: 3em;
+	right: 9.5em;
+	padding: 0.5em 1em 0.8em 1em;
+	position: absolute;
+	text-transform: uppercase;
+	width: 8em;
+	z-index: 1;
+}
+
+.featured-post::before {
+	border: 12px solid rgba(0, 0, 0, 0);
+	border-right-color: #4C80A8;
+	content: ' ';
+	left: -24px;
+	margin-top: -12px;
+	position: absolute;
+	top: 50%;
+}
+
+.featured-post .entypo {
+	font-size: 2.5em;
+}
+
+
+/*
+ * Post Header
+ */
+
 .post-header {
+	overflow: hidden;
 	position: relative;
 }
 
 .post-header .post-thumbnail {
-	max-height: 22em;
+	height: 20em;
 	overflow: hidden;
 }
 
 .post-header .post-thumbnail img {
 	height: auto;
-	margin-top: -5%;
-	max-width: 100%;
+	margin-top: -50%;
+	width: 100%;
+}
+
+.post-header .post-thumbnail img.wide {
+	height: 20em;
+	margin: 0;
+	max-width: none;
+	width: auto;
+}
+
+.post-header .post-thumbnail img.landscape {
+	height: auto;
+	margin-top: -15%;
+	width: 100%;
 }
 
 .post-header .date {
 	background: #ff743d;
 	bottom: 0;
-	color: #fff;
 	font-size: 0.8em;
 	height: 3em;
-	padding: 0.75em 1.75em;
+	padding: 0.75em 1em;
 	position: absolute;
 	right: 0;
 	text-align: center;
-	width: 6em;
+	width: 7.5em;
+	z-index: 10;
+}
+
+.post-header .date::before {
+	border: 12px solid rgba(0, 0, 0, 0);
+	border-right-color: #ff743d;
+	content: ' ';
+	left: -24px;
+	margin-top: -12px;
+	position: absolute;
+	top: 50%;
+}
+
+.post-header .date a {
+	color: #eee;
+	text-decoration: none;
+}
+
+.post-header .date a:hover,
+.post-header .date a:focus {
+	color: #fff;
+}
+
+.post-header .date .entry-date .day {
+	display: inline-block;
+	font-size: 2.5em;
+	font-weight: 600;
+	margin-right: 0.1em;
+	margin-top: -0.1em;
+}
+
+.post-header .date .entry-date .monthyear {
+	display: inline-block;
+}
+
+.post-header .date .entry-date .month,
+.post-header .date .entry-date .year {
+	font-weight: 600;
+}
+
+.post-header .date .entry-date .year {
+	display: block;
+	margin-top: -0.25em;
 }
 
 .post-title {
@@ -282,15 +552,42 @@ a:focus {
 	        transition: color 0.3s ease;
 }
 
+.post-title .edit-link.entypo {
+	font-size: 1.4em;
+}
+
+
+/*
+ * Post Content
+ */
+
 .post-content {
 	line-height: 1.75em;
 	margin: 1.5em;
 	text-align: justify;
 }
 
+.post-content img {
+	height: auto;
+	max-width: 100%;
+}
+
+.post-content h1, h2, h3, h4, h5, h6 {
+	margin: 0.75em 0 0.25em 0;
+}
+
+.post-content ul, ol {
+	margin-left: 2em;
+}
+
 .post-content p {
 	margin: 1.5em 0;
 }
+
+
+/*
+ * Post Footer
+ */
 
 .post-footer {
 	background: #374458;
@@ -367,12 +664,18 @@ a:focus {
 	        transition: all 0.3s ease;
 }
 
+
+/*
+ * Pagination
+ */
+
 .pagination {
 	background: rgba(0, 0, 0, 0.5);
 	padding: 1.5em;
 }
 
-.pagination a {
+.pagination .older-posts a,
+.pagination .recent-posts a {
 	border: 2px solid #f9442d;
 	border-radius: 0.3em;
 	font-size: 0.8em;
@@ -381,16 +684,17 @@ a:focus {
 	text-decoration: none;
 }
 
-.pagination a:hover {
+.pagination .older-posts a:hover,
+.pagination .recent-posts a:hover {
 	border-color: #fff;
 	color: #fff;
 }
 
-.pagination a.recent-posts {
+.pagination .recent-posts {
 	float: left;
 }
 
-.pagination a.older-posts {
+.pagination .older-posts {
 	float: right;
 }
 
@@ -403,8 +707,13 @@ a:focus {
 	width: auto;
 }
 
+
+/*
+ * Footer
+ */
+
 .site-footer {
-	background: url(../img/footer.png) center top no-repeat;
+	background: url(assets/img/footer.png) center top no-repeat;
 	color: #ddd;
 	height: 18em;
 	padding: 1em 1.5em;
