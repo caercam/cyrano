@@ -75,6 +75,7 @@ body {
 	background: url(assets/img/bg.png) center top;
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
+	word-break: break-all;
 	color: #222;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 100;
@@ -398,9 +399,69 @@ img.alignnone {
 .main {
 }
 
-.article {
+.post {
 	background: #fff;
 	position: relative;
+}
+
+.post.format-status .post-content,
+.post.format-link .post-content a,
+.post.format-quote .post-content blockquote {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1.25em;
+}
+
+.post.format-link .post-content a {
+	position: relative;
+}
+
+.post.format-link .post-content a:after {
+	content: '\E74C';
+	font-family: entypo;
+	font-size: 1.25em;
+	position: absolute;
+	right: -0.75em;
+	top: -0.25em;
+}
+
+.format-quote .post-content blockquote {
+	border: 0;
+	margin: 0 2em;
+	padding: 0;
+}
+
+.post.format-chat .post-content p {
+	margin: 0.25em 0;
+	padding: 0.25em;
+}
+
+.post.format-chat .post-content p:nth-child(even) {
+	background: #eef;
+}
+
+.post.format-aside .post-content {
+	margin-left: 2em;
+	padding-left: 2em;
+	position: relative;
+}
+
+.post.format-aside .post-content:after {
+	border-top: 2px solid rgba(0, 0, 0, 0.7);
+	content: ' ';
+	margin-left: -0.25em;
+	left: 0.4em;
+	position: absolute;
+	top: 0.75em;
+	width: 0.8em;
+}
+
+.post.format-aside .post-content:before {
+	border-left: 1px dashed #aaa;
+	content: ' ';
+	height: 100%;
+	left: 0.5em;
+	margin: 0;
+	position: absolute;
 }
 
 
@@ -439,11 +500,27 @@ img.alignnone {
 
 
 /*
+ * Post Formats
+ */
+
+.post-type {
+	background: #fff;
+	color: #18273b;
+	height: 2.75em;
+	left: -2.75em;
+	padding: 0 2em 0 0.75em;
+	position: absolute;
+	width: 100%;
+}
+
+
+/*
  * Post Header
  */
 
 .post-header {
 	overflow: hidden;
+	padding-top: 0.25em;
 	position: relative;
 }
 
@@ -620,10 +697,11 @@ img.alignnone {
 }
 
 .post-footer ul li a:hover {
-	color: #fff;
+	color: #f9442d;
 }
 
 .post-footer ul li.post-more {
+	background: #4c80a8;
 	float: right;
 	line-height: 4.25em;
 	padding: 0;
@@ -631,14 +709,17 @@ img.alignnone {
 	width: 9.5em;
 }
 
+.post-footer ul li.post-more:hover {
+	background: #ff743d;
+}
+
 .post-footer ul li.post-more a {
-	background: #4c80a8;
+	color: #eee;
 	display: block;
 	text-align: center;
 }
 
 .post-footer ul li.post-more a:hover {
-	background: #ff743d;
 }
 
 .post-footer ul li.post-more::before {
@@ -655,8 +736,8 @@ img.alignnone {
 	border-bottom-color: #ff743d;
 }
 
-.post-footer ul li.post-more a,
-.post-footer ul li.post-more a:hover,
+.post-footer ul li.post-more,
+.post-footer ul li.post-more:hover,
 .post-footer ul li.post-more::before,
 .post-footer ul li.post-more:hover::before {
 	-webkit-transition: all 0.3s ease;

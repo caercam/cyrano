@@ -114,6 +114,37 @@ add_action( 'wp_enqueue_scripts', 'cyrano_scripts' );
 
 
 /**
+ * Displays a Custom Icon for Post Formats.
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_post_format( $post_id = null ) {
+
+	if ( is_null( $post_id ) ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	$icons = array(
+		'post'    => '&#9998;',
+		'page'    => '&#10002;',
+		'aside'   => '&#128319;',
+		'audio'   => '&#127925;',
+		'chat'    => '&#59168;',
+		'gallery' => '&#127748;',
+		'image'   => '&#128247;',
+		'link'    => '&#128279;',
+		'quote'   => '&#10078;',
+		'status'  => '&#9000;',
+		'video'   => '&#127916;'
+	);
+
+	$post_format = get_post_format( $post_id );
+
+	echo '<div class="post-type"><span class="entypo">' . ( false === $post_format ? $icons['post'] : $icons[ $post_format ] ). '</span></div>';
+}
+
+/**
  * Displays a Featured Post featureness.
  *
  * @since Cyrano 1.0

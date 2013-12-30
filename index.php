@@ -19,7 +19,8 @@ get_header(); ?>
 			<main id="main" class="main" role="main">
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-				<article class="article" role="article" itemscope itemtype="http://schema.org/Article">
+				<article <?php post_class() ?> role="article" itemscope itemtype="http://schema.org/Article">
+					<?php cyrano_post_format(); ?>
 					<header class="post-header">
 						<div class="post-thumbnail">
 							<?php echo cyrano_post_cover(); ?>
