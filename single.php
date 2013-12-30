@@ -1,13 +1,6 @@
 <?php
 /**
- * The main template file.
- *
- * This is the most generic template file in a WordPress theme and one of the
- * two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * For example, it puts together the home page when no home.php file exists.
- *
- * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ * The Template for displaying all single posts.
  *
  * @package WordPress
  * @subpackage Cyrano
@@ -44,12 +37,13 @@ else
 <?php cyrano_entry_meta(); ?>
 						<div style="clear:both"></div>
 					</footer>
-					
 				</article>
+
+				<?php comments_template(); ?>
 
 <?php endwhile; endif; ?>
 
-<?php cyrano_paging_nav(); ?>
+<?php cyrano_post_nav(); ?>
 
 			</main>
 

@@ -227,7 +227,12 @@ function cyrano_entry_meta() {
 		$tags = sprintf( '<li class="post-tags"><span class="entypo">&#59148;</span> &nbsp;%s</li>', $tags );
 	}
 
-	$more = sprintf( '<li class="post-more"><a href="%s" class="more">%s</a></li>', get_permalink(), __( 'Read More', 'cyrano' ) );
+	if ( ! is_single() )
+		$more = sprintf( '<li class="post-more more"><a href="%s" class="more">%s</a></li>', get_permalink(), __( 'Read More', 'cyrano' ) );
+	else if ( is_single() && comments_open() )
+		$more = '<li class="post-more more-comment"><a href="' . get_comments_link() . '">' . __( 'Leave a comment', 'cyrano' ) . '</a></li>';
+	else
+		$more = '<li class="post-more void"><a>' . __( 'Comments closed.', 'cyrano' ) . '</a></li>';
 ?>
 						<ul>
 							<?php echo $author ?>
@@ -275,13 +280,35 @@ for ( $i = 1; $i <= $total; $i++ ) :
 
 <?php endfor; ?>
 							</ul>
-							<!--<select>
-<?php for ( $i = 1; $i <= $total; $i++ ) : ?>
-								<?php printf( '<option value="%s"%s>%s</option>', get_pagenum_link( $i ), selected( $i, $page, false ), sprintf( __( 'Page %d of %d', 'cyrano' ), $i, $total ) ) ?>
-
-<?php endfor; ?>
-							</select>-->
 						</div>
+					</nav>
+					<div style="clear:both"></div>
+				</div>
+<?php
+}
+
+/**
+ * Displays navigation to next/previous post when applicable.
+*
+* @since Cyrano 1.0
+*
+* @return void
+*/
+function cyrano_post_nav() {
+
+	global $post;
+
+	// Don't print empty markup if there's nowhere to navigate.
+	$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
+	$next     = get_adjacent_post( false, '', false );
+
+	if ( ! $next && ! $previous )
+		return;
+?>
+				<div class="pagination">
+					<nav class="post-navigation" role="navigation">
+						<div class="recent-posts"><?php previous_post_link( '%link', _x( '<span class="meta-nav">&larr;</span> %title', 'Previous post link', 'cyrano' ) ); ?></div>
+						<div class="older-posts"><?php next_post_link( '%link', _x( '%title <span class="meta-nav">&rarr;</span>', 'Next post link', 'cyrano' ) ); ?></div>
 					</nav>
 					<div style="clear:both"></div>
 				</div>
@@ -339,8 +366,74 @@ function cyrano_post_cover( $post_id = null, $echo = true ) {
 }
 
 
+function cyrano_comments( $comment, $args, $depth ) {
 
+	extract( $args, EXTR_SKIP );
 
+?>
 
+				<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
+
+					<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
+
+						<header class="comment-header">
+							<div class="comment-author vcard">
+								<?php echo get_avatar( $comment->comment_author_email, 74 ); ?>
+								<?php printf( '<div class="vcar-content"><cite class="fn">%s</cite></div>', get_comment_author_link(), __( 'says', 'cyrano' ) ); ?>
+							</div>
+						</header>
+
+						<div class="comment-text">
+<?php if ( '0' == $comment->comment_approved ) : ?>
+							<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ) ?></em><br />
+<?php endif; ?>
+
+							<?php comment_text(); ?>
+						</div>
+
+						<footer class="comment-meta">
+							<ul>
+								<li class="comment-date"><span class="entypo">&#128340;</span> &nbsp;<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s' ), get_comment_date(),  get_comment_time() ); ?></a></li>
+								<?php edit_comment_link( __( 'Edit' ), '<li class="comment-edit"><span class="entypo">&#9998;</span> &nbsp;', '</li>' ); ?>
+								<?php
+									comment_reply_link(
+										array_merge(
+											$args,
+											array(
+												'before'     => '<li class="comment-reply">',
+												'reply_text' => '<span class="entypo">&#59154;</span> &nbsp;' . __( 'Reply' ),
+												'after'      => '</li>',
+												'depth'      => $depth,
+												'max_depth'  => $args['max_depth']
+											)
+										)
+									); ?>
+							</ul>
+						</footer>
+
+					</article>
+
+				</li>
+<?php
+}
+
+function cyrano_comment_form_top() {
+?>
+				<header class="comment-respond-header">
+<?php
+}
+add_action( 'comment_form_top', 'cyrano_comment_form_top' );
+
+function cyrano_comment_form_field_comment( $comment_field ) {
+	return "\t\t\t\t</header>\n" . $comment_field . "\n";
+}
+add_filter( 'comment_form_field_comment', 'cyrano_comment_form_field_comment' );
+
+function cyrano_comment_form( $post_id ) {
+?>
+				</div> <!-- /comment-respond-content -->
+<?php
+}
+add_action( 'comment_form', 'cyrano_comment_form' );
 
 

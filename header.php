@@ -51,7 +51,7 @@
 
 			<nav id="menu" class="menu">
 				<ul>
-					<li class="menu-home"><a href="#"><span class="entypo">&#8962;</span></a></li>
+					<li class="menu-home"><a href="/"><span class="entypo">&#8962;</span></a></li>
 					<li class="menu-item"><a href="#">Voyages<span>Ici ou ailleurs</span></a></li>
 					<li class="menu-item"><a href="#">Photographie<span>Vu dans l'objectif</span></a></li>
 					<li class="menu-item"><a href="#">Cinéma<span>Vu en grand</span></a></li>
