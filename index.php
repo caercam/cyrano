@@ -35,7 +35,12 @@ get_header(); ?>
 
 					</header>
 					<div class="post-content" itemprop="articleBody">
-						<?php the_content(); ?>
+						<?php
+if ( '' != get_the_content() )
+	the_content();
+else
+	_e( 'This is somewhat embarassing, huh? Seems like there is nothing here…', 'cyrano' );
+?>
 					</div>
 					<footer class="post-footer">
 <?php cyrano_entry_meta(); ?>

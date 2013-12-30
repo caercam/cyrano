@@ -59,7 +59,7 @@ function cyrano_setup() {
 	// This theme uses its own gallery styles.
 	add_filter( 'use_default_gallery_style', '__return_false' );
 }
-add_action( 'after_setup_theme', 'twentythirteen_setup' );
+add_action( 'after_setup_theme', 'cyrano_setup' );
 
 /**
  * Registers two widget areas.
@@ -92,21 +92,32 @@ function cyrano_widgets_init() {
 }
 add_action( 'widgets_init', 'cyrano_widgets_init' );
 
+/**
+ * Enqueues scripts and styles for front end.
+ *
+ * @since Cyrano 1.0
+ */
 function cyrano_scripts() {
 
 	wp_register_style( 'cyrano', get_stylesheet_uri(), array(), false, 'all' );
 	wp_register_style( 'open-sans', "//fonts.googleapis.com/css?family=Open+Sans:300,700,800,600,400", array(), false, 'all' );
 
-	wp_register_script( 'cyrano', get_template_directory_uri() . '/assets/js/public.js', array(), false, true );
+	wp_register_script( 'cyrano', get_template_directory_uri() . '/assets/js/public.js', array( 'jquery' ), false, true );
 
 	wp_enqueue_style( 'open-sans' );
 	wp_enqueue_style( 'cyrano' );
 
+	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'cyrano' );
 }
 add_action( 'wp_enqueue_scripts', 'cyrano_scripts' );
 
 
+/**
+ * Displays a Featured Post featureness.
+ *
+ * @since Cyrano 1.0
+ */
 function cyrano_featured() {
 
 	if ( is_sticky() && is_home() && ! is_paged() ) :
@@ -149,13 +160,10 @@ function cyrano_entry_date( $echo = true ) {
 }
 
 /**
- * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.
- *
- * Create your own cyrano_entry_meta() to override in a child theme.
+ * Prints HTML with meta information for current post: categories, tags,
+ * permalink, author, and date.
  *
  * @since Cyrano 1.0
- *
- * @return void
  */
 function cyrano_entry_meta() {
 
@@ -204,31 +212,60 @@ function cyrano_entry_meta() {
  * Displays navigation to next/previous set of posts when applicable.
  *
  * @since Cyrano 1.0
- *
- * @return void
  */
 function cyrano_paging_nav() {
 
-	global $wp_query, $page;
+	global $wp_query;
 
 	// Don't print empty markup if there's only one page.
 	if ( $wp_query->max_num_pages < 2 )
 		return;
+
+	$page  = ( $wp_query->get('paged') ? $wp_query->get('paged') : 1 );
+	$total = $wp_query->max_num_pages;
 ?>
 
 				<div class="pagination">
 					<nav class="paging-navigation" role="pagination">
 <?php if ( get_previous_posts_link() ) : ?>
-						<div class="recent-posts"><?php previous_posts_link( __( '<span class="meta-nav">&larr;</span> Newer posts', 'cyrano' ) ); ?></div><?php endif; ?>
-<?php if ( get_next_posts_link() ) : ?>
-						<div class="older-posts"><?php next_posts_link( __( 'Older posts <span class="meta-nav">&rarr;</span>', 'cyrano' ) ); ?></div><?php endif; ?>
-						<div class="page-number"><?php printf( __( 'Page %d of %d', 'cyrano' ), ( $wp_query->get('paged') ? $wp_query->get('paged') : 1 ), $wp_query->max_num_pages ) ?></div>
+						<div class="recent-posts"><?php previous_posts_link( __( '<span class="meta-nav">&larr;</span> Newer posts', 'cyrano' ) ); ?></div>
+<?php
+endif;
+if ( get_next_posts_link() ) : ?>
+						<div class="older-posts"><?php next_posts_link( __( 'Older posts <span class="meta-nav">&rarr;</span>', 'cyrano' ) ); ?></div>
+<?php endif; ?>
+						<div class="page-number">
+							<ul id="paginate-links">
+<?php
+for ( $i = 1; $i <= $total; $i++ ) : 
+	$selected = ( $i == $page );
+?>
+								<?php printf( '<li class="paginate-link%s" id="page_%d"><a href="%s">%s</a></li>', ( $selected ? ' selected' : '' ), $i, ( $selected ? '#' : get_pagenum_link( $i ) ), sprintf( __( 'Page %d of %d', 'cyrano' ), $i, $total ) ) ?>
+
+<?php endfor; ?>
+							</ul>
+							<!--<select>
+<?php for ( $i = 1; $i <= $total; $i++ ) : ?>
+								<?php printf( '<option value="%s"%s>%s</option>', get_pagenum_link( $i ), selected( $i, $page, false ), sprintf( __( 'Page %d of %d', 'cyrano' ), $i, $total ) ) ?>
+
+<?php endfor; ?>
+							</select>-->
+						</div>
 					</nav>
 					<div style="clear:both"></div>
 				</div>
 <?php
 }
 
+/**
+ * Displays a Post thumbnail. If no Thumbnail was set, show a default one. If no
+ * Post ID is submitted, use the current Post.
+ *
+ * @param    int        $post_id Post's ID. Default null.
+ * @param    boolean    $echo Whether to echo the image. Default true.
+ *
+ * @since Cyrano 1.0
+ */
 function cyrano_post_cover( $post_id = null, $echo = true ) {
 
 	$html = '';

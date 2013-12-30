@@ -89,6 +89,14 @@ a:focus {
 	color: #fba452;
 }
 
+a,
+a:hover {
+	-webkit-transition: color 0.3s ease;
+	   -moz-transition: color 0.3s ease;
+	     -o-transition: color 0.3s ease;
+	        transition: color 0.3s ease;
+}
+
 abbr,
 acronym {
 	border-bottom: 1px dotted;
@@ -296,16 +304,9 @@ img.alignnone {
 	text-transform: uppercase;
 }
 
-.menu ul li a:hover {
+.menu ul li a:hover,
+.menu ul li.menu-nav a:hover span {
 	color: #f9442d;
-}
-
-.menu ul li a,
-.menu ul li a:hover {
-	-webkit-transition: color 0.3s ease;
-	   -moz-transition: color 0.3s ease;
-	     -o-transition: color 0.3s ease;
-	        transition: color 0.3s ease;
 }
 
 .menu ul li a span {
@@ -670,7 +671,7 @@ img.alignnone {
  */
 
 .pagination {
-	background: rgba(0, 0, 0, 0.5);
+	background: #0c141e;
 	padding: 1.5em;
 }
 
@@ -690,6 +691,11 @@ img.alignnone {
 	color: #fff;
 }
 
+.pagination .recent-posts,
+.pagination .older-posts {
+	margin-top: 0.3em;
+}
+
 .pagination .recent-posts {
 	float: left;
 }
@@ -701,12 +707,98 @@ img.alignnone {
 .page-number {
 	color: #ddd;
 	font-size: 0.8em;
+	height: 2.75em;
 	line-height: 2.75em;
 	margin: 0 auto;
+	position: relative;
 	text-align: center;
-	width: auto;
+	width: 10.25em;
 }
 
+.page-number ul {
+	background: transparent;
+	border: 2px solid #f9442d;
+	border-radius: 0.3em;
+	color: #f9442f;
+	font-weight: 400;
+	height: 2.25em;
+	list-style: none;
+	margin: 0 auto;
+	position: relative;
+	width: 10em;
+}
+
+.page-number ul li {
+	height: 100%;
+	line-height: 2.25em;
+	position: absolute;
+	text-align: left;
+	visibility: hidden;
+	width: 100%;
+}
+
+.page-number ul li.selected {
+	visibility: visible;
+}
+
+.page-number ul li.selected::after {
+	content: '\E764';
+	font-family: 'entypo';
+	font-size: 2em;
+	position: absolute;
+	right: 0.5em;
+	top: 0.05em;
+}
+
+.page-number ul li a {
+	display: block;
+	padding-left: 1.5em;
+	text-decoration: none;
+}
+
+.page-number ul:hover {
+	border-color: #fff;
+}
+
+.page-number ul,
+.page-number ul:hover {
+	-webkit-transition: border 0.3s ease;
+	   -moz-transition: border 0.3s ease;
+	     -o-transition: border 0.3s ease;
+	        transition: border 0.3s ease;
+}
+
+.page-number ul li:hover a,
+.page-number ul li a:hover,
+.page-number ul li.selected:hover::after,
+.page-number ul.active li a {
+	color: #fff;
+}
+
+.page-number ul.active {
+	background: #f9442d;
+	border: 2px solid #f9442d;
+	height: auto;
+	position: absolute;
+}
+
+.page-number ul.active li {
+	background: #f9442d;
+	position: relative;
+	visibility: visible;
+}
+
+.page-number ul.active li:hover,
+.page-number ul.active li.selected {
+	background: #fff;
+}
+
+.page-number ul.active li:hover a,
+.page-number ul.active li:hover a > *,
+.page-number ul.active li.selected a,
+.page-number ul.active li.selected > * {
+	color: #f9442d;
+}
 
 /*
  * Footer
