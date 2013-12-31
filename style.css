@@ -240,6 +240,11 @@ img.alignnone {
 	padding: 0 0.75em;
 }
 
+.required {
+	color: #e93131;
+	font-weight: 400;
+}
+
 /*
  * Wrapper
  */
@@ -924,6 +929,8 @@ img.alignnone {
  * Comment Respond
  */
 
+/* Logged In */
+
 .comment-respond {
 	border-top: 1px solid #ddd;
 	margin-top: 3em;
@@ -934,21 +941,21 @@ img.alignnone {
 	margin-bottom: 1.25em;
 }
 
-.comment-respond-header {
+.comment-respond-header.comment-respond-loggedin {
 	float: left;
 	text-align: center;
 	width: 8em;
 }
 
-.comment-respond-header .avatar {
+.comment-respond-header.comment-respond-loggedin .avatar {
 	border-radius: 4em;
 }
 
-.comment-respond-header .comment-author-vcard a {
+.comment-respond-header.comment-respond-loggedin .comment-author-vcard a {
 	text-decoration: none;
 }
 
-.comment-respond-header .comment-author-vcard span {
+.comment-respond-header.comment-respond-loggedin .comment-author-vcard span {
 	font-size: 1.5em;
 }
 
@@ -1020,6 +1027,55 @@ img.alignnone {
 	border-color: #f9442d;
 	color: #fff;
 }
+
+/* Not Logged In */
+
+.comment-respond-header.comment-respond-fields {
+	margin: 2em 0 1em 0;
+}
+
+.comment-respond-header.comment-respond-fields .comment-form-author,
+.comment-respond-header.comment-respond-fields .comment-form-email,
+.comment-respond-header.comment-respond-fields .comment-form-url {
+	margin: 0.5em 0;
+	position: relative;
+}
+
+.comment-respond-header.comment-respond-fields .comment-form-label {
+	float: left;
+	text-align: center;
+	width: 8em;
+}
+
+.comment-respond-header.comment-respond-fields .comment-form-input {
+	display: inline-block;
+	max-width: 24em;
+	width: 60%;
+}
+
+.comment-respond-header.comment-respond-fields label {
+	line-height: 2em;
+}
+
+.comment-respond-header.comment-respond-fields input {
+	border: 1px solid #ccc;
+	color: #333;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1.1em;
+	padding: 0.25em 0.5em;
+	width: 100%;
+}
+
+.comment-respond-avatar {
+	float: left;
+	text-align: center;
+	width: 8em;
+}
+
+.comment-respond-avatar .avatar {
+	border-radius: 4em;
+}
+
 
 /*
  * Pagination

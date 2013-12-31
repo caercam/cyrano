@@ -114,6 +114,40 @@ add_action( 'wp_enqueue_scripts', 'cyrano_scripts' );
 
 
 /**
+ * Displays Cyrano Menu.
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_nav_menu() {
+
+	$menu_name = 'primary';
+
+	if ( ( $locations = get_nav_menu_locations() ) && isset( $locations[ $menu_name ] ) ) {
+
+		$menu  = wp_get_nav_menu_object( $locations[ $menu_name ] );
+		$items = wp_get_nav_menu_items( $menu->term_id );
+		_wp_menu_item_classes_by_context( $items );
+
+		if ( $items ) {
+?>
+				<ul>
+					<li class="menu-home"><a href="<?php echo home_url( '/' ); ?>"><span class="entypo">&#8962;</span></a></li>
+<?php
+			foreach ( (array) $items as $item ) {
+?>
+					<?php printf( '<li class="%s"><a href="%s" title="%s">%s<span>%s</span></a></li>', trim( implode( ' ', $item->classes ) ), $item->url, $item->description, $item->title, $item->attr_title ); ?>
+<?php
+			}
+?>
+					<li class="menu-nav"><a href="#header"><span class="entypo">&#59239;</span></a></li>
+				</ul>
+<?php
+		}
+	}
+}
+
+
+/**
  * Displays a Custom Icon for Post Formats.
  *
  * @since Cyrano 1.0
@@ -365,7 +399,15 @@ function cyrano_post_cover( $post_id = null, $echo = true ) {
 		return $html;
 }
 
-
+/**
+ * Displays a custom Comments List.
+ *
+ * @param    object     $comment The Comment Object.
+ * @param    array      $args Display arguments.
+ * @param    int        $depth Comment Depth.
+ *
+ * @since Cyrano 1.0
+ */
 function cyrano_comments( $comment, $args, $depth ) {
 
 	extract( $args, EXTR_SKIP );
@@ -417,18 +459,81 @@ function cyrano_comments( $comment, $args, $depth ) {
 <?php
 }
 
-function cyrano_comment_form_top() {
+
+/**
+ * Styling the Comment Form to look like Comments List.
+ * 
+ * @uses comment_form_logged_in Filter Hook to display a Header before the Author VCard
+ * 
+ * @param    string    $logged_in_as   The logged-in-as HTML-formatted message.
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_comment_logged_in( $logged_in_as ) {
 ?>
-				<header class="comment-respond-header">
+				<header class="comment-respond-header comment-respond-loggedin">
+<?php
+	return $logged_in_as;
+}
+add_filter( 'comment_form_logged_in', 'cyrano_comment_logged_in' );
+
+
+/**
+ * Styling the Comment Form to look like Comments List.
+ * 
+ * @uses comment_form_field_comment Filter Hook to end the Header before the Comment Textarea
+ * 
+ * @param array  $commenter     An array containing the comment author's username, email, and URL.
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_comment_form_logged_in_after( $commenter ) {
+?>
+				</header>
+
 <?php
 }
-add_action( 'comment_form_top', 'cyrano_comment_form_top' );
+add_action( 'comment_form_logged_in_after', 'cyrano_comment_form_logged_in_after' );
 
-function cyrano_comment_form_field_comment( $comment_field ) {
-	return "\t\t\t\t</header>\n" . $comment_field . "\n";
+
+/**
+ * Styling the Comment Form to look like Comments List.
+ * 
+ * @uses comment_form_before_fields Action Hook to display a Header before the Author VCard
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_comment_before_fields() {
+?>
+				<header class="comment-respond-header comment-respond-fields">
+<?php
 }
-add_filter( 'comment_form_field_comment', 'cyrano_comment_form_field_comment' );
+add_action( 'comment_form_before_fields', 'cyrano_comment_before_fields' );
 
+
+/**
+ * Styling the Comment Form to look like Comments List.
+ * 
+ * @uses comment_form_after_fields Action Hook to end the Header before the Comment Textarea
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_comment_form_after_fields() {
+?>
+				</header>
+				<div class="comment-respond-avatar"><?php echo get_avatar( null, 74 ); ?></div>
+<?php
+}
+add_action( 'comment_form_after_fields', 'cyrano_comment_form_after_fields' );
+
+
+/**
+ * Styling the Comment Form to look like Comments List.
+ * 
+ * @uses comment_form Action Hook to display 
+ *
+ * @since Cyrano 1.0
+ */
 function cyrano_comment_form( $post_id ) {
 ?>
 				</div> <!-- /comment-respond-content -->

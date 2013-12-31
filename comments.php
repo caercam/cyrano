@@ -49,8 +49,14 @@ endif; // have_comments() ?>
 					$user = wp_get_current_user();
 					comment_form(
 						array(
-							'comment_field' => '<div class="comment-respond-content"><p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="' . __( 'Want to say something? Please, help yourself!', 'cyrano' ) . '"></textarea></p>',
-							'logged_in_as'  => '<p class="logged-in-as">' . get_avatar( $user->user_email, 74 ) . '<div class="comment-author-vcard">' . sprintf( '<a href="%1$s">%2$s</a> <a href="%3$s" title="%3$s"><span class="entypo">&#59201;</span></a></div>', get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ), __( 'Log out of this account' ) ) . '</p>'
+							'comment_notes_before' => '',
+							'fields' => array(
+								'author'               => '<div class="comment-form-author"><div class="comment-form-label">' . '<label for="author">' . __( 'Name' ) . ' <span class="required">*</span></label></div><div class="comment-form-input">' . '<input id="author" name="author" type="text" value="" size="30" aria-required="true" placeholder="' . __( 'John Doe', 'cyrano' ) . '" /></div></div>',
+								'email'                => '<div class="comment-form-email"><div class="comment-form-label"><label for="email">' . __( 'Email' ) . ' <span class="required">*</span></label></div><div class="comment-form-input">' . '<input id="email" name="email" type="email" value="" size="30" aria-required="true" placeholder="' . __( 'john@johndoe.me', 'cyrano' ) . '" /></div></div>',
+								'url'                  => '<div class="comment-form-url"><div class="comment-form-label"><label for="url">' . __( 'Website' ) . '</label></div><div class="comment-form-input">' . '<input id="url" name="url" type="url" value="" size="30" placeholder="' . __( 'http://johndoe.me', 'cyrano' ) . '" /></div></div><div style="clear:both"></div>'
+							),
+							'comment_field'        => '<div class="comment-respond-content"><div class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" placeholder="' . __( 'Want to say something? Please, help yourself!', 'cyrano' ) . '"></textarea></div>',
+							'logged_in_as'         => '<div class="logged-in-as">' . get_avatar( $user->user_email, 74 ) . '<div class="comment-author-vcard">' . sprintf( '<a href="%1$s">%2$s</a> <a href="%3$s" title="%3$s"><span class="entypo">&#59201;</span></a></div>', get_edit_user_link(), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ), __( 'Log out of this account' ) ) . '</div>'
 						)
 					); ?>
 

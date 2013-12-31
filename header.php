@@ -50,13 +50,6 @@
 			</header>
 
 			<nav id="menu" class="menu">
-				<ul>
-					<li class="menu-home"><a href="/"><span class="entypo">&#8962;</span></a></li>
-					<li class="menu-item"><a href="#">Voyages<span>Ici ou ailleurs</span></a></li>
-					<li class="menu-item"><a href="#">Photographie<span>Vu dans l'objectif</span></a></li>
-					<li class="menu-item"><a href="#">Cinéma<span>Vu en grand</span></a></li>
-					<li class="menu-item"><a href="#">Lecture<span>À travers les pages</span></a></li>
-					<li class="menu-item"><a href="#">Divers<span>Et bien plus</span></a></li>
-					<li class="menu-nav"><a href="#header"><span class="entypo">&#59239;</span></a></li>
-				</ul>
+				<?php cyrano_nav_menu(); ?>
+
 			</nav>
