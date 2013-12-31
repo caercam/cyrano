@@ -5,7 +5,7 @@ Description: Cyrano is a clean and simple, flat, blue oriented, responsive WordP
 Author: Charlie MERLAND
 Author URI: http://www.caercam.org/
 Version: 1.0.0
-Tags: one-columns, custom-background, custom-header, custom-menu, featured-images, sticky-post, translation-ready
+Tags: one-column, custom-background, custom-header, custom-menu, featured-images, sticky-post, translation-ready
 License: GNU General Public License v3
 License URI: http://www.opensource.org/licenses/gpl-license.php
 Text Domain: cyrano
@@ -139,6 +139,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: 'Open Sans', sans-serif;
 }
 
+input {
+	padding: 0.25em;
+}
+
 p {
 	/*clear: both;*/
 }
@@ -240,10 +244,40 @@ img.alignnone {
 	padding: 0 0.75em;
 }
 
+.gallery-caption {
+	font-size: 0.8em;
+}
+
+.search-field {
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	border-radius: 0.25em;
+	padding: 0.5em;
+}
+
+.search-submit {
+	background: #4c80a8;
+	border: 0;
+	border-radius: 0.25em;
+	color: #fff;
+	padding: 0.5em;
+}
+
+.search-submit:hover {
+	background: #f9442d;
+}
+
+.search-submit:active {
+	position: relative;
+	top: 1px;
+}
+
 .required {
 	color: #e93131;
 	font-weight: 400;
 }
+
+/*.sticky {}*/
 
 /*
  * Wrapper
@@ -287,22 +321,22 @@ img.alignnone {
  * Menu
  */
 
-.menu {
+.nav-menu {
 	background: #fff;
 }
 
-.menu ul {
+.nav-menu ul {
 	list-style: none;
 }
 
-.menu ul li {
+.nav-menu ul li {
 	display: inline-block;
 	height: 4.25em;
 	text-align: center;
 	width: 19.5%;
 }
 
-.menu ul li a {
+.nav-menu ul li a {
 	color: #666;
 	font-size: 0.9em;
 	font-weight: 400;
@@ -311,12 +345,12 @@ img.alignnone {
 	text-transform: uppercase;
 }
 
-.menu ul li a:hover,
-.menu ul li.menu-nav a:hover span {
+.nav-menu ul li a:hover,
+.nav-menu ul li.menu-nav a:hover span {
 	color: #f9442d;
 }
 
-.menu ul li a span {
+.nav-menu ul li a span {
 	color: #aaa;
 	display: block;
 	font-size: 0.75em;
@@ -324,8 +358,8 @@ img.alignnone {
 	margin-top: -1.75em;
 }
 
-.menu ul li.menu-home,
-.menu ul li.menu-nav {
+.nav-menu ul li.menu-home,
+.nav-menu ul li.menu-nav {
 	display: none;
 }
 
@@ -475,7 +509,7 @@ img.alignnone {
  * Featured Posts
  */
 
-.featured-post {
+.post.sticky .featured-post {
 	background: #4C80A8;
 	bottom: 0;
 	color: #fff;
@@ -490,8 +524,8 @@ img.alignnone {
 	z-index: 1;
 }
 
-.featured-post::before {
-	border: 12px solid rgba(0, 0, 0, 0);
+.post.sticky .featured-post::before {
+	border: 12px solid transparent;
 	border-right-color: #4C80A8;
 	content: ' ';
 	left: -24px;
@@ -500,7 +534,7 @@ img.alignnone {
 	top: 50%;
 }
 
-.featured-post .entypo {
+.post.sticky .featured-post .entypo {
 	font-size: 2.5em;
 }
 
@@ -568,7 +602,7 @@ img.alignnone {
 }
 
 .post-header .date::before {
-	border: 12px solid rgba(0, 0, 0, 0);
+	border: 12px solid transparent;
 	border-right-color: #ff743d;
 	content: ' ';
 	left: -24px;
@@ -668,6 +702,10 @@ img.alignnone {
 	margin: 1.5em 0;
 }
 
+.post-content .paginate {
+	text-align: center;
+}
+
 
 /*
  * Post Footer
@@ -740,7 +778,7 @@ img.alignnone {
 }
 
 .post-footer ul li.post-more.more-comment::before {
-	border: 12px solid rgba(0, 0, 0, 0);
+	border: 12px solid transparent;
 	border-top-color: #4c80a8;
 	bottom: -24px;
 	content: ' ';
@@ -814,7 +852,7 @@ img.alignnone {
 }
 
 .comment-text:after {
-	border: 12px solid rgba(0, 0, 0, 0);
+	border: 12px solid transparent;
 	border-right-color: #fff;
 	content: ' ';
 	left: -24px;
@@ -823,8 +861,8 @@ img.alignnone {
 }
 
 .comment-text:before {
-	border: 13px solid rgba(0, 0, 0, 0);
-	border-right-color: #bbb;
+	border: 13px solid transparent;
+	border-right-color: #ccc;
 	content: ' ';
 	left: -26px;
 	position: absolute;
@@ -923,6 +961,40 @@ img.alignnone {
 	left: -1px;
 	position: absolute;
 	top: 0.5em;
+}
+
+/* By Post Author */
+
+.bypostauthor .comment-header {
+	float: right;
+}
+
+.bypostauthor .comment-text,
+.bypostauthor .comment-meta {
+	margin-right: 8em;
+	margin-left: 0;
+}
+
+.bypostauthor .comment-text:before {
+	border-left-color: #ccc;
+	border-right-color: transparent;
+	left: auto;
+	right: -26px;
+	top: 21px;
+}
+
+.bypostauthor .comment-text:after {
+	border-left-color: #fff;
+	border-right-color: transparent;
+	content: ' ';
+	left: auto;
+	right: -24px;
+	top: 22px;
+}
+
+.comment-list .children .comment.bypostauthor:after,
+.comment-list .children .comment.bypostauthor:before {
+	display: none;
 }
 
 /*
@@ -1102,6 +1174,16 @@ img.alignnone {
 	color: #fff;
 }
 
+.pagination .older-posts a,
+.pagination .recent-posts a,
+.pagination .older-posts a:hover,
+.pagination .recent-posts a:hover {
+	-webkit-transition: all 0.3s ease;
+	   -moz-transition: all 0.3s ease;
+	     -o-transition: all 0.3s ease;
+	        transition: all 0.3s ease;
+}
+
 .pagination .recent-posts,
 .pagination .older-posts {
 	margin-top: 0.3em;
@@ -1216,15 +1298,70 @@ img.alignnone {
  */
 
 .site-footer {
-	background: url(assets/img/footer.png) center top no-repeat;
+	background: #060a0f url(assets/img/footer.png) center bottom no-repeat;
 	color: #ddd;
-	height: 18em;
-	padding: 1em 1.5em;
+	min-height: 18em;
+	padding: 1em 1.5em 2em 1.5em;
 }
 
-.footer-text {
+.site-footer a {
+	text-decoration: none;
+}
+
+.site-footer .widget {
+	float: left;
+	font-size: 0.8em;
+	margin: 0 1.5%;
+	width: 30%;
+}
+
+.site-footer .widget ul {
+	padding-left: 2em;
+}
+
+.site-footer .footer-text {
 	color: #888;
 	font-size: 0.75em;
 	font-weight: 400;
+	margin-top: 4em;
+	text-align: center;
+	width: 100%;
+}
+
+
+/*
+ * Widgets
+ */
+
+#wp-calendar {
+	font-size: 0.95em;
+}
+
+#wp-calendar caption {
+	color: #aaa;
+	margin-bottom: 0.25em;
+}
+
+#wp-calendar th {
+	background: #0c141e;
+	border: 0;
+	color: #aaa;
+}
+
+#wp-calendar td {
+	border: 0;
+	padding: 0.25em;
 	text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -49,7 +49,7 @@
 
 			</header>
 
-			<nav id="menu" class="menu">
+			<nav id="menu" class="nav-menu">
 				<?php cyrano_nav_menu(); ?>
 
 			</nav>

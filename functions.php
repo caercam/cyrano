@@ -16,48 +16,25 @@
  * @return void
  */
 function cyrano_setup() {
-	/*
-	 * Makes Twenty Thirteen available for translation.
-	 *
-	 * Translations can be added to the /languages/ directory.
-	 * If you're building a theme based on Twenty Thirteen, use a find and
-	 * replace to change 'cyrano' to the name of your theme in all
-	 * template files.
-	 */
+
 	load_theme_textdomain( 'cyrano', get_template_directory() . '/languages' );
 
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, icons, and column width.
-	 */
 	//add_editor_style( array( 'css/editor-style.css', 'fonts/genericons.css', twentythirteen_fonts_url() ) );
 
-	// Adds RSS feed links to <head> for posts and comments.
 	add_theme_support( 'automatic-feed-links' );
-
-	// Switches default core markup for search form, comment form, and comments
-	// to output valid HTML5.
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
-
-	/*
-	 * This theme supports all available post formats by default.
-	 * See http://codex.wordpress.org/Post_Formats
-	 */
+	add_theme_support( 'custom-header', array() );
+	add_theme_support( 'custom-background', array() );
+	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'post-formats', array(
 		'aside', 'audio', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video'
 	) );
 
-	// This theme uses wp_nav_menu() in one location.
 	register_nav_menu( 'primary', __( 'Navigation Menu', 'cyrano' ) );
 
-	/*
-	 * This theme uses a custom image size for featured images, displayed on
-	 * "standard" posts and pages.
-	 */
-	add_theme_support( 'post-thumbnails' );
+	//add_filter( 'use_default_gallery_style', '__return_false' );
 
-	// This theme uses its own gallery styles.
-	add_filter( 'use_default_gallery_style', '__return_false' );
+	if ( ! isset( $content_width ) ) $content_width = 896;
 }
 add_action( 'after_setup_theme', 'cyrano_setup' );
 
@@ -69,21 +46,10 @@ add_action( 'after_setup_theme', 'cyrano_setup' );
  * @return void
  */
 function cyrano_widgets_init() {
-
 	register_sidebar( array(
 		'name'          => __( 'Main Widget Area', 'cyrano' ),
 		'id'            => 'sidebar-1',
 		'description'   => __( 'Appears in the footer section of the site.', 'cyrano' ),
-		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</aside>',
-		'before_title'  => '<h3 class="widget-title">',
-		'after_title'   => '</h3>',
-	) );
-
-	register_sidebar( array(
-		'name'          => __( 'Secondary Widget Area', 'cyrano' ),
-		'id'            => 'sidebar-2',
-		'description'   => __( 'Appears on posts and pages in the sidebar.', 'cyrano' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h3 class="widget-title">',
@@ -109,6 +75,7 @@ function cyrano_scripts() {
 
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'cyrano' );
+	wp_enqueue_script( 'comment-reply' );
 }
 add_action( 'wp_enqueue_scripts', 'cyrano_scripts' );
 
@@ -247,7 +214,7 @@ function cyrano_entry_meta() {
 	if ( $categories ) {
 		$c = explode( __( ', ', 'cyrano' ), $categories );
 		if ( count( $c ) > 3 )
-			$categories = implode( __( ', ', 'cyrano' ), array_slice( $c, 0, 3 ) ) . '… (' . ( count( $c ) - 3 ) . ' more)';
+			$categories = implode( __( ', ', 'cyrano' ), array_slice( $c, 0, 3 ) ) . '&hellip; (' . ( count( $c ) - 3 ) . ' more)';
 
 		$categories = sprintf( '<li class="post-categories"><span class="entypo">&#128193;</span> &nbsp;%s</li>', $categories );
 	}
@@ -256,7 +223,7 @@ function cyrano_entry_meta() {
 	if ( $tags ) {
 		$t = explode( __( ', ', 'cyrano' ), $tags );
 		if ( count( $t ) > 3 )
-			$tags = implode( __( ', ', 'cyrano' ), array_slice( $t, 0, 3 ) ) . '… (' . ( count( $t ) - 3 ) . ' more)';
+			$tags = implode( __( ', ', 'cyrano' ), array_slice( $t, 0, 3 ) ) . '&hellip; (' . ( count( $t ) - 3 ) . ' more)';
 
 		$tags = sprintf( '<li class="post-tags"><span class="entypo">&#59148;</span> &nbsp;%s</li>', $tags );
 	}
@@ -427,7 +394,7 @@ function cyrano_comments( $comment, $args, $depth ) {
 
 						<div class="comment-text">
 <?php if ( '0' == $comment->comment_approved ) : ?>
-							<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ) ?></em><br />
+							<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'cyrano' ) ?></em><br />
 <?php endif; ?>
 
 							<?php comment_text(); ?>
@@ -435,15 +402,15 @@ function cyrano_comments( $comment, $args, $depth ) {
 
 						<footer class="comment-meta">
 							<ul>
-								<li class="comment-date"><span class="entypo">&#128340;</span> &nbsp;<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s' ), get_comment_date(),  get_comment_time() ); ?></a></li>
-								<?php edit_comment_link( __( 'Edit' ), '<li class="comment-edit"><span class="entypo">&#9998;</span> &nbsp;', '</li>' ); ?>
+								<li class="comment-date"><span class="entypo">&#128340;</span> &nbsp;<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s', 'cyrano' ), get_comment_date(),  get_comment_time() ); ?></a></li>
+								<?php edit_comment_link( __( 'Edit', 'cyrano' ), '<li class="comment-edit"><span class="entypo">&#9998;</span> &nbsp;', '</li>' ); ?>
 								<?php
 									comment_reply_link(
 										array_merge(
 											$args,
 											array(
 												'before'     => '<li class="comment-reply">',
-												'reply_text' => '<span class="entypo">&#59154;</span> &nbsp;' . __( 'Reply' ),
+												'reply_text' => '<span class="entypo">&#59154;</span> &nbsp;' . __( 'Reply', 'cyrano' ),
 												'after'      => '</li>',
 												'depth'      => $depth,
 												'max_depth'  => $args['max_depth']

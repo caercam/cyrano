@@ -37,7 +37,7 @@ get_header(); ?>
 if ( '' != get_the_content() )
 	the_content();
 else
-	_e( 'This is somewhat embarassing, huh? Seems like there is nothing here…', 'cyrano' );
+	_e( 'This is somewhat embarassing, huh? Seems like there is nothing here&hellip;', 'cyrano' );
 ?>
 					</div>
 					<footer class="post-footer">

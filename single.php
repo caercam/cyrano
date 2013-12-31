@@ -27,10 +27,15 @@ get_header(); ?>
 					</header>
 					<div class="post-content" itemprop="articleBody">
 						<?php
-if ( '' != get_the_content() )
+if ( '' != get_the_content() ) {
 	the_content();
-else
-	_e( 'This is somewhat embarassing, huh? Seems like there is nothing here…', 'cyrano' );
+?>
+						<div class="paginate"><?php wp_link_pages(); ?></div>
+<?php
+}
+else {
+	_e( 'This is somewhat embarassing, huh? Seems like there is nothing here&hellip;', 'cyrano' );
+}
 ?>
 					</div>
 					<footer class="post-footer">
