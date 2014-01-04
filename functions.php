@@ -23,8 +23,41 @@ function cyrano_setup() {
 
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
+
 	add_theme_support( 'custom-header', array() );
-	add_theme_support( 'custom-background', array() );
+	//require get_template_directory() . '/include/custom-header.php';
+
+	$default_background = array(
+		'default-color'          => '0c141e',
+		'default-image'          => get_template_directory_uri() . '/assets/img/bg.png',
+		'wp-head-callback'       => '_custom_background_cb',
+		'admin-head-callback'    => '',
+		'admin-preview-callback' => ''
+	);
+
+	$default_header = array(
+		'default-text-color'     => 'fff',
+		'default-image'          => '%s/assets/img/header.jpg',
+		'height'                 => 288,
+		'width'                  => 896,
+		'wp-head-callback'       => 'cyrano_header_style',
+		'admin-head-callback'    => 'cyrano_admin_header_style',
+		'admin-preview-callback' => 'cyrano_admin_header_image',
+	);
+
+	register_default_headers(
+		array(
+			'cyrano' => array(
+				'url'           => '%s/assets/img/header.jpg',
+				'thumbnail_url' => '%s/screenshot.png',
+				'description'   => _x( 'Cyrano', 'header image description', 'cyrano' )
+			)
+		) 
+	);
+
+	add_theme_support( 'custom-background', $default_background );
+	add_theme_support( 'custom-header', $default_header );
+
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'post-formats', array(
 		'aside', 'audio', 'chat', 'gallery', 'image', 'link', 'quote', 'status', 'video'
@@ -37,6 +70,120 @@ function cyrano_setup() {
 	if ( ! isset( $content_width ) ) $content_width = 896;
 }
 add_action( 'after_setup_theme', 'cyrano_setup' );
+
+
+/**
+ * Load Open Sans Font
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_custom_header_fonts() {
+
+	wp_enqueue_style( 'cyrano-fonts', '//fonts.googleapis.com/css?family=Open+Sans:300,700', array(), null );
+}
+add_action( 'admin_print_styles-appearance_page_custom-header', 'cyrano_custom_header_fonts' );
+
+
+/**
+ * Header Styling
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_header_style() {
+
+	$header_image = get_header_image();
+	$text_color   = get_header_textcolor();
+
+	if ( empty( $header_image ) && $text_color == get_theme_support( 'custom-header', 'default-text-color' ) )
+		return;
+
+	echo "\t\t".'<style type="text/css" id="cyrano-header-css">'."\n\t\t";
+
+	if ( ! empty( $header_image ) )
+		echo '.site-header {background: url(' . get_header_image() . ') no-repeat scroll top; background-size: cover;} ';
+
+	if ( ! display_header_text() )
+		echo '.site-title, .site-description {display: none} ';
+	else if ( $text_color != get_theme_support( 'custom-header', 'default-text-color' ) )
+		echo '.site-title, .site-description {color: #' . esc_attr( $text_color ) . '} ';
+
+	echo "\t\t".'</style>'."\n";
+}
+
+
+/**
+ * Styles the header image displayed on the Appearance > Header admin panel.
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_admin_header_style() {
+	$header_image = get_header_image();
+?>
+	<style type="text/css" id="cyrano-admin-header-css">
+	.appearance_page_custom-header #headimg {
+		border: none;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing:    border-box;
+		box-sizing:         border-box;
+		<?php if ( ! empty( $header_image ) ) { echo 'background: url(' . esc_url( $header_image ) . ') no-repeat scroll top;'; } ?>
+		margin: 0 auto;
+		max-width: 896px;
+		padding: 2em;
+		text-align: center;
+		<?php if ( ! empty( $header_image ) || display_header_text() ) { echo 'min-height: 288px;'; } ?>
+		width: 100%;
+	}
+
+	<?php if ( ! display_header_text() ) : ?>
+	#headimg h1,
+	#headimg h2 {
+		display: none;
+	}
+	<?php endif; ?>
+
+	#headimg .site-title {
+		font-family: 'Open Sans', sans-serif;
+		font-size: 3em;
+		font-weight: 100;
+		margin-top: -0.25em;
+	}
+	#headimg .site-description {
+		color: #fff;
+		font-family: 'Open Sans', sans-serif;
+		font-size: 0.9em;
+		font-weight: 700;
+		opacity: 0.5;
+		text-transform: uppercase;
+	}
+
+	.default-header img {
+		max-width: 230px;
+		width: auto;
+	}
+	</style>
+<?php
+}
+
+
+/**
+ * Outputs markup to be displayed on the Appearance > Header admin panel.
+ * This callback overrides the default markup displayed there.
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_admin_header_image() {
+	?>
+	<header id="headimg" class="site-header" role="header" style="background: url(<?php header_image(); ?>) no-repeat scroll top;">
+		<?php $style = ' style="color:#' . get_header_textcolor() . ';"'; ?>
+		<h1 class="site-logo">
+			<a href="#"<?php echo $style; ?> onclick="return false;"><img src="<?php echo get_template_directory_uri() . '/assets/img/logo_128.png'; ?>" alt="<?php bloginfo( 'name' ); ?>"></a>
+		</h1>
+		<h2 class="site-title"<?php echo $style; ?>><?php bloginfo( 'name' ); ?></h2>
+		<p class="site-description"<?php echo $style; ?>><?php bloginfo( 'description' ); ?></p>
+	</header>
+<?php
+}
+
 
 /**
  * Registers two widget areas.
@@ -58,6 +205,7 @@ function cyrano_widgets_init() {
 }
 add_action( 'widgets_init', 'cyrano_widgets_init' );
 
+
 /**
  * Enqueues scripts and styles for front end.
  *
@@ -66,7 +214,7 @@ add_action( 'widgets_init', 'cyrano_widgets_init' );
 function cyrano_scripts() {
 
 	wp_register_style( 'cyrano', get_stylesheet_uri(), array(), false, 'all' );
-	wp_register_style( 'open-sans', "//fonts.googleapis.com/css?family=Open+Sans:300,700,800,600,400", array(), false, 'all' );
+	wp_register_style( 'open-sans', "//fonts.googleapis.com/css?family=Open+Sans:100,300,700", array(), false, 'all' );
 
 	wp_register_script( 'cyrano', get_template_directory_uri() . '/assets/js/public.js', array( 'jquery' ), false, true );
 
@@ -78,6 +226,20 @@ function cyrano_scripts() {
 	wp_enqueue_script( 'comment-reply' );
 }
 add_action( 'wp_enqueue_scripts', 'cyrano_scripts' );
+
+
+/**
+* Get the site logo
+* If no logo is set in the theme's options, use default WP-Badge as logo 
+* 
+* @since    Cyrano 1.0
+*
+* @return   string        The site logo URL.
+*/
+function cyrano_site_logo() {
+	$site_logo = get_theme_mod( 'cyrano_logo', get_template_directory_uri() . '/assets/img/logo_128.png' );
+	return $site_logo;
+}
 
 
 /**
@@ -509,3 +671,48 @@ function cyrano_comment_form( $post_id ) {
 add_action( 'comment_form', 'cyrano_comment_form' );
 
 
+
+
+
+/**
+ * Theme Customizer
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_theme_customizer( $wp_customize ) {
+
+	$wp_customize->add_section(
+		'cyrano_logo_section',
+		array(
+			'title'       => __( 'Site Logo', 'cyrano' ),
+			'priority'    => 50,
+			'description' => '',
+		)
+	);
+
+	$wp_customize->add_setting(
+		'cyrano_logo',
+		array(
+			'default'   => get_template_directory_uri() . '/assets/img/logo_128.png',
+			'transport' => 'postMessage',
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'cyrano_logo',
+			array(
+				'label'      => __( 'Custom Logo', 'cyrano' ),
+				'section'    => 'cyrano_logo_section',
+				'settings'   => 'cyrano_logo',
+			)
+		)
+	);
+
+	$wp_customize->get_setting('cyrano_logo')->transport='postMessage';
+
+	// Enqueue scripts for real-time preview
+	wp_enqueue_script( 'cyrano-customizer', get_template_directory_uri() . '/assets/js/customizer.js', array( 'jquery' ) );
+}
+add_action( 'customize_register', 'cyrano_theme_customizer' );

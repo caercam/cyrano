@@ -41,7 +41,7 @@
 
 				<h1 class="site-logo">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<img src="<?php echo get_template_directory_uri() ?>/assets/img/logo_128.png" alt="CaerCam.org" />
+						<img src="<?php echo cyrano_site_logo(); ?>" alt="<?php bloginfo( 'name' ); ?>" />
 					</a>
 				</h1>
 				<h2 class="site-title"><?php bloginfo( 'name' ); ?></h2>
@@ -49,7 +49,7 @@
 
 			</header>
 
-			<nav id="menu" class="nav-menu">
+			<nav id="nav-menu" class="nav-menu">
 				<?php cyrano_nav_menu(); ?>
 
 			</nav>

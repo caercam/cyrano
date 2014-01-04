@@ -49,17 +49,6 @@ Text Domain: cyrano
 	top: 2px;
 }
 
-/*@font-face {
-    font-family: 'entypo-social';
-    src: url('ColabMed-webfont.eot');
-    src: url('ColabMed-webfont.eot?#iefix') format('embedded-opentype'),
-         url('ColabMed-webfont.woff') format('woff'),
-         url('ColabMed-webfont.ttf') format('truetype'),
-         url('ColabMed-webfont.svg#colaborate-medregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}*/
-
 
 /*
  * Basics
@@ -72,7 +61,6 @@ Text Domain: cyrano
 }
 
 body {
-	background: url(assets/img/bg.png) center top;
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
 	word-break: break-all;
@@ -296,7 +284,6 @@ img.alignnone {
  */
 
 .site-header {
-	background: url(assets/img/header.jpg) center top no-repeat;
 	color: #fff;
 	height: 14em;
 	padding: 2em;
@@ -310,9 +297,10 @@ img.alignnone {
 }
 
 .site-description {
-	color: rgba(255, 255, 255, 0.5);
+	color: #fff;
 	font-size: 0.9em;
 	font-weight: 700;
+	opacity: 0.5;
 	text-transform: uppercase;
 }
 
@@ -368,7 +356,7 @@ img.alignnone {
  * Menu Scroll
  */
 
-.menu.scroll {
+.nav-menu.scroll {
 	border: 1px solid #333;
 	border-top: 0;
 	margin-left: -4.05em;
@@ -378,46 +366,46 @@ img.alignnone {
 	z-index: 100;
 }
 
-.menu.scroll ul li {
+.nav-menu.scroll ul li {
 	height: 3.5em;
 	width: 17.5%;
 }
 
-.menu.scroll ul li:nth-child(2) {
+.nav-menu.scroll ul li:nth-child(2) {
 	margin-left: 4em;
 }
 
-.menu.scroll ul li.menu-home {
+.nav-menu.scroll ul li.menu-home {
 	background: #333;
 	display: inline-block;
 	position: absolute;
 	width: 4em;
 }
 
-.menu.scroll ul li.menu-home:hover {
+.nav-menu.scroll ul li.menu-home:hover {
 	background: #fff;
 }
 
-.menu.scroll li a {
+.nav-menu.scroll li a {
 	font-size: 0.8em;
 	line-height: 3.75em;
 }
 
-.menu.scroll li.menu-item a span {
+.nav-menu.scroll li.menu-item a span {
 	font-size: 0.75em;
 }
 
-.menu.scroll ul li.menu-home a span {
+.nav-menu.scroll ul li.menu-home a span {
 	color: #fff;
 	font-size: 4em;
 	margin: 0;
 }
 
-.menu.scroll ul li.menu-home:hover a span {
+.nav-menu.scroll ul li.menu-home:hover a span {
 	color: #f9442d;
 }
 
-.menu.scroll ul li.menu-nav {
+.nav-menu.scroll ul li.menu-nav {
 	position: absolute;
 	display: inline-block;
 	right: 0;
@@ -425,7 +413,7 @@ img.alignnone {
 	width: 4em;
 }
 
-.menu.scroll ul li.menu-nav a span {
+.nav-menu.scroll ul li.menu-nav a span {
 	font-size: 3em;
 	line-height: 1.35em;
 	margin: 0;
@@ -439,23 +427,23 @@ img.alignnone {
 .main {
 }
 
-.post {
+.hentry {
 	background: #fff;
 	position: relative;
 }
 
-.post.format-status .post-content,
-.post.format-link .post-content a,
-.post.format-quote .post-content blockquote {
+.hentry.format-status .post-content,
+.hentry.format-link .post-content a,
+.hentry.format-quote .post-content blockquote {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.25em;
 }
 
-.post.format-link .post-content a {
+.hentry.format-link .post-content a {
 	position: relative;
 }
 
-.post.format-link .post-content a:after {
+.hentry.format-link .post-content a:after {
 	content: '\E74C';
 	font-family: entypo;
 	font-size: 1.25em;
@@ -470,22 +458,22 @@ img.alignnone {
 	padding: 0;
 }
 
-.post.format-chat .post-content p {
+.hentry.format-chat .post-content p {
 	margin: 0.25em 0;
 	padding: 0.25em;
 }
 
-.post.format-chat .post-content p:nth-child(even) {
+.hentry.format-chat .post-content p:nth-child(even) {
 	background: #eef;
 }
 
-.post.format-aside .post-content {
+.hentry.format-aside .post-content {
 	margin-left: 2em;
 	padding-left: 2em;
 	position: relative;
 }
 
-.post.format-aside .post-content:after {
+.hentry.format-aside .post-content:after {
 	border-top: 2px solid rgba(0, 0, 0, 0.7);
 	content: ' ';
 	margin-left: -0.25em;
@@ -495,7 +483,7 @@ img.alignnone {
 	width: 0.8em;
 }
 
-.post.format-aside .post-content:before {
+.hentry.format-aside .post-content:before {
 	border-left: 1px dashed #aaa;
 	content: ' ';
 	height: 100%;
@@ -509,7 +497,7 @@ img.alignnone {
  * Featured Posts
  */
 
-.post.sticky .featured-post {
+.hentry.sticky .featured-post {
 	background: #4C80A8;
 	bottom: 0;
 	color: #fff;
@@ -524,7 +512,7 @@ img.alignnone {
 	z-index: 1;
 }
 
-.post.sticky .featured-post::before {
+.hentry.sticky .featured-post::before {
 	border: 12px solid transparent;
 	border-right-color: #4C80A8;
 	content: ' ';
@@ -534,7 +522,7 @@ img.alignnone {
 	top: 50%;
 }
 
-.post.sticky .featured-post .entypo {
+.hentry.sticky .featured-post .entypo {
 	font-size: 2.5em;
 }
 
@@ -715,7 +703,7 @@ img.alignnone {
 	background: #374458;
 	color: #91959b;
 	font-size: 0.8em;
-	height: 4.25em;
+	max-height: 4.25em;
 	padding: 0;
 }
 
