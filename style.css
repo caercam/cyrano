@@ -366,6 +366,10 @@ img.alignnone {
 	z-index: 100;
 }
 
+.nav-menu.scroll28 {
+	top: 28px;
+}
+
 .nav-menu.scroll ul li {
 	height: 3.5em;
 	width: 17.5%;
