@@ -497,7 +497,7 @@ function cyrano_post_cover( $post_id = null, $echo = true ) {
 	}
 
 	$t_id = get_post_thumbnail_id( $post_id );
-	$thumbnail = wp_get_attachment_image_src( $t_id, 'large' );
+	$thumbnail = wp_get_attachment_image_src( $t_id, 'full' );
 
 	if ( ! $thumbnail ) {
 		$html = sprintf( '<img class="landscape" src="%s" width="896" height="480" alt="%s" />'."\n", get_template_directory_uri() . '/assets/img/default_cover.jpg', get_bloginfo('name') );

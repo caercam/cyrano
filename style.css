@@ -63,9 +63,10 @@ Text Domain: cyrano
 body {
 	-ms-word-wrap: break-word;
 	word-wrap: break-word;
-	word-break: break-all;
+	word-break: break-word;
 	color: #222;
 	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
 	font-weight: 100;
 }
 
@@ -315,6 +316,7 @@ img.alignnone {
 
 .nav-menu ul {
 	list-style: none;
+	text-align: center;
 }
 
 .nav-menu ul li {
@@ -368,6 +370,10 @@ img.alignnone {
 
 .nav-menu.scroll28 {
 	top: 28px;
+}
+
+.nav-menu.scroll ul {
+	text-align: left;
 }
 
 .nav-menu.scroll ul li {
@@ -1348,12 +1354,85 @@ img.alignnone {
 
 
 
+/*
+ * Responsive
+ */
 
+@media (max-width: 58em) {
+	
+	
+	
+}
 
+@media (max-width: 48em) {
+	
+	.wrapper {
+		max-width: none !important;
+		width: 100% !important;
+	}
+	
+	.nav-menu.scroll {
+		max-width: 100%;
+		margin-left: 0;
+	}
+	
+	.nav-menu.scroll ul li {
+		width: 17%;
+	}
+	
+	.post-header .post-thumbnail {
+		height: 18em;
+	}
+	
+	.post-header .date::before {
+		border-width: 10px;
+		left: -20px;
+		margin-top: -11px;
+	}
+	
+	.post-header .date {
+		font-size: 0.7em;
+		height: 2.8em;
+	}
+	
+	.post-header .date .entry-date .day {
+		font-size: 2.25em;
+	}
+	
+	.post-title {
+		font-size: 1.25em;
+		width: 94%;
+	}
+	
+	.post-footer {
+		font-size: 0.7em;
+	}
+	
+	.post-footer ul li a {
+		font-size: 1.25em;
+	}
+}
 
-
-
-
-
-
-
+@media (max-width: 30em) {
+	
+	.wrapper {
+		max-width: none !important;
+		width: 100% !important;
+	}
+	
+	.nav-menu.scroll {
+		max-width: 100%;
+		margin-left: 0;
+	}
+	
+	.nav-menu ul li {
+		height: 3em;
+		padding: 0 0.75em;
+		width: auto;
+	}
+	
+	.nav-menu ul li a span {
+		display: none;
+	}
+	
+}

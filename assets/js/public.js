@@ -9,10 +9,16 @@
 		if ( $('#wpadminbar').length )
 			var _class = 'scroll scroll28';
 
-		if ( window.scrollY > limit && ! menu.hasClass(_class) )
+		if ( window.scrollY > limit && ! menu.hasClass(_class) ) {
 			menu.addClass(_class);
-		else if ( window.scrollY < limit && menu.hasClass(_class) )
+			menu.width(header.outerWidth() + 128);
+		}
+		else if ( window.scrollY < limit && menu.hasClass(_class) ) {
 			menu.removeClass(_class);
+			menu.width(header.outerWidth());
+		}
+
+		
 	});
 
 	var list = $('.paginate-link');
