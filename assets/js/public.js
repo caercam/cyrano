@@ -1,6 +1,21 @@
 (function( $ ) {
 
-	$(window).scroll(function() {
+	var responsive_menu = function() {
+
+		var menu = $('#nav-menu');
+
+		console.log(window.innerWidth <= 480 && ! menu.hasClass('responsive'));
+		console.log(window.innerWidth > 480 && menu.hasClass('responsive'));
+
+		if ( window.innerWidth <= 480 && ! menu.hasClass('responsive') ) {
+			menu.addClass('responsive');
+		}
+		else if ( window.innerWidth > 480 && menu.hasClass('responsive') ) {
+			menu.removeClass('responsive');
+		}
+	};
+
+	var scrolled_menu = function() {
 		var header = $('#header');
 		var menu   = $('#nav-menu');
 		var limit  = header.offset().top + header.height();
@@ -17,8 +32,17 @@
 			menu.removeClass(_class);
 			menu.width(header.outerWidth());
 		}
+	};
 
-		
+	responsive_menu();
+	scrolled_menu();
+
+	$(window).resize(function() {
+		responsive_menu();
+	});
+
+	$(window).scroll(function() {
+		scrolled_menu();
 	});
 
 	var list = $('.paginate-link');

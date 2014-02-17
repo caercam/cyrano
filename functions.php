@@ -257,19 +257,24 @@ function cyrano_nav_menu() {
 		$items = wp_get_nav_menu_items( $menu->term_id );
 		_wp_menu_item_classes_by_context( $items );
 
+		$li = '';
+		$sl = '';
+
 		if ( $items ) {
+			foreach ( (array) $items as $item ) {
+				$li .= sprintf( '<li class="%s"><a href="%s" title="%s">%s<span class="menu-item-description">%s</span></a></li>', trim( implode( ' ', $item->classes ) ), $item->url, $item->description, $item->title, $item->attr_title );
+				$sl .= sprintf( '<option value="%s">%s</option>', $item->url, $item->title );
+			}
+
 ?>
 				<ul>
 					<li class="menu-home"><a href="<?php echo home_url( '/' ); ?>"><span class="entypo">&#8962;</span></a></li>
-<?php
-			foreach ( (array) $items as $item ) {
-?>
-					<?php printf( '<li class="%s"><a href="%s" title="%s">%s<span>%s</span></a></li>', trim( implode( ' ', $item->classes ) ), $item->url, $item->description, $item->title, $item->attr_title ); ?>
-<?php
-			}
-?>
+					<?php echo $li ?>
 					<li class="menu-nav"><a href="#header"><span class="entypo">&#59239;</span></a></li>
 				</ul>
+				<select id="nav-menu-res">
+					<?php echo $sl ?>
+				</select>
 <?php
 		}
 	}
@@ -391,7 +396,7 @@ function cyrano_entry_meta() {
 	}
 
 	if ( ! is_single() )
-		$more = sprintf( '<li class="post-more more"><a href="%s" class="more">%s</a></li>', get_permalink(), __( 'Read More', 'cyrano' ) );
+		$more = sprintf( '<li class="post-more more"><a href="%s" class="more"><span class="entypo">&#59212;</span>&nbsp;<span class="text">%s</span></a></li>', get_permalink(), __( 'Read More', 'cyrano' ) );
 	else if ( is_single() && comments_open() )
 		$more = '<li class="post-more more-comment"><a href="' . get_comments_link() . '">' . __( 'Leave a comment', 'cyrano' ) . '</a></li>';
 	else
@@ -427,11 +432,11 @@ function cyrano_paging_nav() {
 				<div class="pagination">
 					<nav class="paging-navigation" role="pagination">
 <?php if ( get_previous_posts_link() ) : ?>
-						<div class="recent-posts"><?php previous_posts_link( __( '<span class="meta-nav">&larr;</span> Newer posts', 'cyrano' ) ); ?></div>
+						<div class="recent-posts"><?php previous_posts_link( __( '<span class="meta-nav">&larr;</span> <span class="meta-text">Newer posts</span>', 'cyrano' ) ); ?></div>
 <?php
 endif;
 if ( get_next_posts_link() ) : ?>
-						<div class="older-posts"><?php next_posts_link( __( 'Older posts <span class="meta-nav">&rarr;</span>', 'cyrano' ) ); ?></div>
+						<div class="older-posts"><?php next_posts_link( __( '<span class="meta-text">Older posts</span> <span class="meta-nav">&rarr;</span>', 'cyrano' ) ); ?></div>
 <?php endif; ?>
 						<div class="page-number">
 							<ul id="paginate-links">
