@@ -398,9 +398,9 @@ function cyrano_entry_meta() {
 	if ( ! is_single() )
 		$more = sprintf( '<li class="post-more more"><a href="%s" class="more"><span class="entypo">&#59212;</span>&nbsp;<span class="text">%s</span></a></li>', get_permalink(), __( 'Read More', 'cyrano' ) );
 	else if ( is_single() && comments_open() )
-		$more = '<li class="post-more more-comment"><a href="' . get_comments_link() . '">' . __( 'Leave a comment', 'cyrano' ) . '</a></li>';
+		$more = sprintf( '<li class="post-more more-comment"><a href="%s"><span class="entypo">&#59168;</span>&nbsp;<span class="text">%s</span></a></li>', get_comments_link(), __( 'Leave a comment', 'cyrano' ) );
 	else
-		$more = '<li class="post-more void"><a>' . __( 'Comments closed.', 'cyrano' ) . '</a></li>';
+		$more = sprintf( '<li class="post-more void"><a><span class="entypo">&#128263;</span>&nbsp;<span class="text">%s</span></a></li>', __( 'Comments closed.', 'cyrano' ) );
 ?>
 						<ul>
 							<?php echo $author ?>
@@ -486,13 +486,15 @@ function cyrano_post_nav() {
 /**
  * Displays a Post thumbnail. If no Thumbnail was set, show a default one. If no
  * Post ID is submitted, use the current Post.
+ * 
+ * This could be deprecated: uses img instead of backgrounded div. See cyrano_post_cover()
  *
  * @param    int        $post_id Post's ID. Default null.
  * @param    boolean    $echo Whether to echo the image. Default true.
  *
  * @since Cyrano 1.0
  */
-function cyrano_post_cover( $post_id = null, $echo = true ) {
+function cyrano_post_cover_img( $post_id = null, $echo = true ) {
 
 	$html = '';
 
@@ -526,6 +528,60 @@ function cyrano_post_cover( $post_id = null, $echo = true ) {
 
 		$html = sprintf( '<img %s src="%s" width="%d" height="%d" alt="%s" />'."\n", $class, $thumbnail[0], $w, $h, get_the_title( $post_id ) );
 	}
+
+	if ( $echo )
+		echo $html;
+	else
+		return $html;
+}
+
+/**
+ * Displays a Post thumbnail. If no Thumbnail was set, show a default one. If no
+ * Post ID is submitted, use the current Post.
+ * 
+ * This could be deprecated: uses img instead of backgrounded div. See cyrano_post_cover()
+ *
+ * @param    int        $post_id Post's ID. Default null.
+ * @param    boolean    $echo Whether to echo the image. Default true.
+ *
+ * @since Cyrano 1.0
+ */
+function cyrano_post_cover( $post_id = null, $echo = true ) {
+
+	$html = '';
+
+	if ( is_null( $post_id ) ) {
+		global $post;
+		$post_id = $post->ID;
+	}
+
+	$t_id = get_post_thumbnail_id( $post_id );
+	$thumbnail = wp_get_attachment_image_src( $t_id, 'full' );
+
+	$class = 'landscape';
+	$src   = get_template_directory_uri() . '/assets/img/default_cover.jpg';
+
+	if ( $thumbnail ) {
+
+		$src = $thumbnail[0];
+		$w   = $thumbnail[1];
+		$h   = $thumbnail[2];
+
+		$landscape = ( $w > $h );
+		$wide      = ( $w > ( 2 * $h ) );
+
+		if ( $wide ) {
+			$class = 'wide';
+		}
+		else if ( $landscape ) {
+			$class = 'landscape';
+		}
+		else {
+			$class = '';
+		}
+	}
+
+	$html = sprintf( '<div class="background %s" style="background-image:url(%s)"></div>', $class, $src );
 
 	if ( $echo )
 		echo $html;
@@ -569,7 +625,7 @@ function cyrano_comments( $comment, $args, $depth ) {
 
 						<footer class="comment-meta">
 							<ul>
-								<li class="comment-date"><span class="entypo">&#128340;</span> &nbsp;<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s', 'cyrano' ), get_comment_date(),  get_comment_time() ); ?></a></li>
+								<li class="comment-date"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><span class="entypo">&#128340;</span>&nbsp;<span class="text"><?php printf( __( '%1$s at %2$s', 'cyrano' ), get_comment_date(),  get_comment_time() ); ?></a></span></li>
 								<?php edit_comment_link( __( 'Edit', 'cyrano' ), '<li class="comment-edit"><span class="entypo">&#9998;</span> &nbsp;', '</li>' ); ?>
 								<?php
 									comment_reply_link(
@@ -577,7 +633,7 @@ function cyrano_comments( $comment, $args, $depth ) {
 											$args,
 											array(
 												'before'     => '<li class="comment-reply">',
-												'reply_text' => '<span class="entypo">&#59154;</span> &nbsp;' . __( 'Reply', 'cyrano' ),
+												'reply_text' => '<span class="entypo">&#59154;</span>&nbsp;<span class="text">' . __( 'Reply', 'cyrano' ) . '</span>',
 												'after'      => '</li>',
 												'depth'      => $depth,
 												'max_depth'  => $args['max_depth']

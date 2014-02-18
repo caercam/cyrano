@@ -592,9 +592,10 @@ img.alignnone {
 	color: #18273b;
 	height: 2.75em;
 	left: -2.75em;
-	padding: 0 2em 0 0.75em;
+	padding: 0;
 	position: absolute;
-	width: 100%;
+	text-align: center;
+	width: 2.75em;
 }
 
 
@@ -611,6 +612,13 @@ img.alignnone {
 .post-header .post-thumbnail {
 	height: 20em;
 	overflow: hidden;
+}
+
+.post-header .post-thumbnail .background {
+	background-size: cover !important;
+	background-position: center center;
+	height: 100%;
+	width: 100%;
 }
 
 .post-header .post-thumbnail img {
@@ -726,6 +734,7 @@ img.alignnone {
 .post-content {
 	line-height: 1.75em;
 	margin: 1.5em;
+	overflow: hidden;
 	text-align: justify;
 }
 
@@ -968,7 +977,7 @@ img.alignnone {
 	        transition: background 0.3s ease;
 }
 
-.comment-meta ul li span {
+.comment-meta ul li span.entypo {
 	font-size: 1.5em;
 }
 
@@ -1421,6 +1430,12 @@ img.alignnone {
 		width: 100% !important;
 	}
 	
+	.post-type {
+		background: rgba(255,255,255,0.5);
+		left: 0;
+		z-index: 1;
+	}
+	
 	.nav-menu.scroll {
 		max-width: 100%;
 		margin-left: 0;
@@ -1468,7 +1483,50 @@ img.alignnone {
 	}
 }
 
-@media (max-width: 30em) {
+/*@media (max-width: 40em) {
+	
+	.nav-menu ul li {
+		height: 3em;
+		padding: 0 0.75em;
+		width: auto;
+	}
+	
+	.nav-menu.scroll ul li {
+		height: 3.25em;
+		width: auto;
+	}
+	
+	.nav-menu ul li.menu-item a span,
+	.nav-menu.scroll ul li.menu-nav {
+		display: none;
+	}
+	
+	.nav-menu.scroll ul li.menu-home {
+		height: 3.25em;
+		width: 2em;
+	}
+	
+	.nav-menu.scroll ul li.menu-home a span {
+		font-size: 3.5em;
+	}
+	
+	.post-title {
+		font-size: 1.2em;
+		height: auto;
+		position: static;
+		width: auto;
+	}
+	
+	.post-header .date {
+		float: right;
+		font-size: 0.5em;
+		padding: 0.5em 1em;
+		position: static
+	}
+	
+}*/
+
+@media (max-width: 40em) {
 	
 	.wrapper {
 		max-width: none !important;
@@ -1504,10 +1562,6 @@ img.alignnone {
 		font-size: 3.5em;
 	}
 	
-	.nav-menu.scroll ul li:nth-child(2) {
-		margin-left: 0;
-	}
-	
 	.nav-menu.scroll ul li {
 		width: auto;
 	}
@@ -1520,7 +1574,7 @@ img.alignnone {
 		font-size: 1.2em;
 		height: auto;
 		position: static;
-		width: 100%;
+		width: auto;
 	}
 	
 	.post-header .date {
@@ -1543,12 +1597,9 @@ img.alignnone {
 		min-width: 4em;
 	}
 	
-	.post-footer ul li.post-more.more::before {
+	.post-footer ul li.post-more.more::before,
+	.post-footer ul li.post-more.more:hover::before {
 		border-bottom-color: transparent;
-	}
-	
-	.post-footer ul li.post-more a .text {
-		display: none;
 	}
 	
 	.post-footer ul li.post-more a .entypo {
@@ -1556,8 +1607,117 @@ img.alignnone {
 		padding-top: 0.4em;
 	}
 	
-	.pagination .older-posts a .meta-text,
-	.pagination .recent-posts a .meta-text {
+	.comments-area .comments-title,
+	.comment-reply-title {
+		font-size: 1.1em;
+	}
+	
+	.comment-header {
+		margin: 1em 0 0 0;
+		width: 3em;
+	}
+	
+	.comment-author .avatar,
+	.comment-header .avatar {
+		height: 2em;
+		width: 2em;
+	}
+	
+	.bypostauthor .comment-text, .bypostauthor .comment-meta {
+		margin-right: 3em;
+	}
+	
+	.comment-text {
+		margin-left: 3em;
+	}
+	
+	.post-footer ul li.post-more a .text,
+	.comment-meta ul li span.text {
 		display: none;
+	}
+	
+	.comment-meta ul li span.entypo {
+		font-size: 2.5em;
+	}
+	
+	.comment-meta ul li.comment-reply {
+		min-width: 1.5em;
+	}
+	
+	.comment-respond {
+		margin-top: 2em;
+	}
+	
+	.comment-respond-header.comment-respond-fields {
+		margin: 0 0 1em 0;
+	}
+	
+	.comment-respond-header.comment-respond-fields .comment-form-input {
+		width: 92%;
+	}
+	
+	.comment-respond-avatar {
+		display: none;
+	}
+	
+	.comment-respond-content {
+		margin-left: 0;
+	}
+	
+	.comment-form-comment textarea {
+		height: 6em;
+		max-width: 80% !important;
+		width: 100%;
+	}
+	
+	.comment-form-comment:before,
+	.comment-form-comment:after {
+		content: none;
+	}
+	
+	.comment-list .children,
+	.children .children {
+		margin-left: 1em;
+	}
+	
+	.comment-respond .form-submit {
+		text-align: center;
+	}
+
+	.comment-respond .form-submit #submit {
+		display: block;
+		width: 100%;
+	}
+	
+	.pagination .recent-posts,
+	.pagination .older-posts {
+		float: none !important;
+		margin-top: 0.5em;
+	}
+
+	.pagination .older-posts a,
+	.pagination .recent-posts a {
+		display: block;
+		text-align: center;
+	}
+	
+	.page-number {
+		margin-top: 0.5em;
+		width: 100%;
+	}
+	
+	.page-number ul {
+		width: 99%;
+	}
+	
+	.page-number ul li {
+		text-align: center;
+	}
+}
+
+@media (max-width: 30em) {
+	
+	.nav-menu.scroll ul li:nth-child(2) {
+		margin-left: 0;
 	}
 }
