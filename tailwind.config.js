@@ -7,8 +7,14 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: theme => ({
-        'header': "url('../images/header.jpg')",
+        'footer': "url('../images/footer.png')",
+        'header': "url('../images/header.png')",
+        'plane': "url('../images/bg-plane.png')",
       }),
+      backgroundSize: {
+        'auto-full': 'auto 100%',
+        'full-auto': '100% auto',
+      },
       colors: {
         'cyrano-light': '#efefff',
         'cyrano-dark': '#06090e',

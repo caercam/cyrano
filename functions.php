@@ -55,6 +55,15 @@ class Cyrano {
   	register_nav_menus( [
   		'primary' => 'Menu principal',
   	] );
+
+  	register_sidebar( array(
+  		'name'          => 'Pied de page',
+  		'id'            => 'sidebar-footer',
+  		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+  		'after_widget'  => '</aside>',
+  		'before_title'  => '',
+  		'after_title'   => '',
+  	) );
   }
 
   /**
