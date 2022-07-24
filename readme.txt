@@ -1,4 +1,0 @@
-Cyrano
-======
-
-Cyrano WordPress Theme
