@@ -3,6 +3,8 @@ module.exports = {
   content: [
     '**/*.php',
     '*.php',
+    './src/css/*.css',
+    './src/js/*.js',
   ],
   theme: {
     extend: {

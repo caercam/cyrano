@@ -91,7 +91,7 @@ class Cyrano {
    */
   private function register_scripts() {
 
-    wp_register_script( 'cyrano-script', get_theme_file_uri( '/dist/js/cyrano.js' ), [], wp_get_theme()->get( 'Version' ) );
+    wp_register_script( 'cyrano-script', get_theme_file_uri( '/dist/js/app.js' ), [], wp_get_theme()->get( 'Version' ), true );
   }
 
   /**
