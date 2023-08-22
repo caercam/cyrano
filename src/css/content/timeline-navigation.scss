@@ -1,0 +1,44 @@
+.wrapper {
+  & > .content {
+    .timeline-navigation {
+      @apply relative bg-cyrano-dark;
+
+      .line {
+        @apply absolute bottom-[calc(1.5rem+1px)] left-4 right-4 h-0.5 bg-cyrano-light/[.5] rounded-full;
+      }
+
+      nav {
+        @apply relative h-20 flex items-center justify-start md:justify-center gap-6 overflow-auto px-8;
+
+        a,
+        span {
+          @apply text-xs text-cyrano-light/[.5] font-medium;
+        }
+
+        a {
+          @apply relative pb-4;
+
+          &::after {
+            @apply content-[''] absolute left-[calc(50%-2px)] -bottom-0.5 w-2 h-2 bg-cyrano-dark border border-cyrano-light/[.5] ring-4 ring-cyrano-dark rounded-full z-10;
+          }
+
+          &.active {
+            @apply text-cyrano-orange font-bold;
+
+            &::after {
+              @apply bg-cyrano-orange border-cyrano-orange;
+            }
+          }
+        }
+
+        span {
+          @apply opacity-0;
+        }
+      }
+
+      & + .timeline {
+        @apply md:-mt-8;
+      }
+    }
+  }
+}

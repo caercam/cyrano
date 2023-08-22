@@ -19,14 +19,19 @@ module.exports = {
       },
       colors: {
         'cyrano-light': '#efefff',
-        'cyrano-dark': '#06090e',
+        'cyrano-dark': '#121c2c',
         'cyrano-navy': '#18273c',
-        'cyrano-gray': '#aab',
+        'cyrano-gray': '#aaaabb',
+        'cyrano-yellow': '#ada393',
         'cyrano-orange': '#f86037',
         'cyrano-blue': '#5996cd',
         'cyrano-sky': '#accbe6',
         'cyrano-teal': '#6f9d9f',
         'cyrano-green': '#33cd3d',
+      },
+      fontFamily: {
+        'sans': ['Open Sans', 'sans-serif'],
+        'serif': ['Bitter', 'serif'],
       },
       fontSize: {
         'xxs': '.625rem',

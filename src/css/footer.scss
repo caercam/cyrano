@@ -1,0 +1,5 @@
+.wrapper {
+  & > .footer {
+    @apply flex flex-col bg-footer bg-bottom mt-auto;
+  }
+}

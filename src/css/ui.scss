@@ -1,0 +1,17 @@
+a {
+  @apply transition-all duration-300;
+
+  &::after,
+  &::before {
+    @apply transition-all duration-300;
+  }
+
+  &:hover {
+    @apply duration-200;
+
+    &::after,
+    &::before {
+      @apply duration-200;
+    }
+  }
+}

@@ -3,7 +3,7 @@ const navToggle = document.querySelector('.nav-toggle')
 if (navToggle) {
     navToggle.addEventListener('click', (event) => {
         event.preventDefault()
-        const nav = document.querySelector('.nav')
+        const nav = document.querySelector('.navigation')
         if (nav) {
             nav.classList.toggle('active')
         }

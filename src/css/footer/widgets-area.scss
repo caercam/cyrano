@@ -1,0 +1,49 @@
+.wrapper {
+  & > .footer {
+    .widgets-area {
+      @apply flex flex-col gap-y-4 p-8 lg:p-24;
+
+      .widget {
+        @apply w-full;
+
+        .wp-block-calendar {
+          table {
+            @apply text-sm;
+
+            caption {
+              @apply text-cyrano-gray font-bold uppercase mb-4;
+            }
+
+            th {
+              @apply bg-transparent text-cyrano-gray font-semibold border-x-0 border-t-0 border-b-cyrano-gray border-opacity-50 p-4;
+            }
+
+            td {
+              @apply border-x-0 border-t-0 border-b-cyrano-gray border-opacity-50 text-cyrano-gray font-light font-semibold p-4;
+
+              a {
+                @apply text-cyrano-orange font-bold no-underline;
+              }
+
+              &#today {
+                @apply bg-cyrano-gray bg-opacity-20;
+              }
+            }
+          }
+        }
+
+        .wp-calendar-nav {
+          @apply flex flex-row items-center justify-center gap-x-8 mt-8;
+
+          .pad {
+            @apply w-px h-4 bg-cyrano-gray bg-opacity-20;
+          }
+
+          a {
+            @apply text-cyrano-gray text-sm uppercase no-underline p-2;
+          }
+        }
+      }
+    }
+  }
+}

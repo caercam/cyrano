@@ -1,0 +1,20 @@
+.wrapper {
+  & > .content {
+    .pagination {
+      @apply flex flex-row items-center justify-center bg-white;
+
+      a {
+        @apply flex items-center justify-center bg-cyrano-sky hover:bg-cyrano-orange transition-colors duration-300;
+      }
+
+      .nav-next,
+      .nav-previous {
+        @apply w-1/2 h-24;
+
+        svg {
+          @apply h-8 fill-white;
+        }
+      }
+    }
+  }
+}

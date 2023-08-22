@@ -1,0 +1,19 @@
+.wrapper {
+  & > .header {
+    .banner {
+      @apply h-96 flex flex-col items-center justify-center bg-header bg-center bg-no-repeat bg-cover text-white;
+
+      .site-logo {
+        @apply w-32 h-32 drop-shadow;
+      }
+
+      .site-title {
+        @apply text-3xl md:text-4xl lg:text-5xl font-light drop-shadow mt-2 mb-6;
+      }
+
+      .site-description {
+        @apply text-sm font-bold uppercase drop-shadow opacity-60;
+      }
+    }
+  }
+}

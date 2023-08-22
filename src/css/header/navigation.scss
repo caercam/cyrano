@@ -1,0 +1,67 @@
+.wrapper {
+  & > .header {
+
+    & > .navigation {
+      @apply relative hidden sm:block sm:h-20 bg-white border-b border-b-cyrano-gray border-opacity-30;
+
+      /*&::before {
+        @apply content-[''] absolute left-1/2 -bottom-8 h-0 w-0 border border-transparent border-[1rem] border-t-cyrano-gray border-opacity-40 -ml-4 -mb-px z-10;
+      }
+
+      &::after {
+        @apply content-[''] absolute left-1/2 -bottom-8 h-0 w-0 border border-transparent border-[1rem] border-t-white -ml-4 z-10;
+      }*/
+
+      .menu {
+        @apply w-full h-full flex flex-col sm:flex-row items-center justify-around;
+
+        .menu-item {
+          @apply w-full h-full;
+
+          a {
+            @apply w-full h-16 sm:h-full flex flex-col items-center justify-center border-b border-b-gray-300 sm:border-0 text-sm text-teal-600 sm:text-gray-600 font-semibold uppercase transition-all duration-200;
+
+            &::after {
+              @apply content-[attr(title)] block leading-4 text-xxs text-teal-800 text-opacity-80 sm:text-gray-400 sm:text-opacity-100 transition-all duration-200;
+            }
+
+            &:hover {
+              @apply text-cyrano-orange transition-all duration-200;
+
+              &::after {
+                @apply text-cyrano-orange transition-all duration-200;
+              }
+            }
+          }
+
+          &:last-child {
+            a {
+              @apply border-0;
+            }
+          }
+        }
+      }
+
+      &.active {
+        @apply block;
+      }
+    }
+
+
+    & > .mobile-navigation {
+      @apply relative h-16 flex flex-row items-center sm:hidden bg-gradient-to-b from-teal-700 to-teal-600;
+
+      &::after {
+        @apply content-[''] absolute left-1/2 -bottom-8 h-0 w-0 border border-transparent border-[1rem] border-t-teal-600 -ml-4;
+      }
+
+      a {
+        @apply w-1/2 flex items-center justify-center;
+
+        svg {
+          @apply w-6 h-6 fill-white;
+        }
+      }
+    }
+  }
+}

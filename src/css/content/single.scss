@@ -1,0 +1,126 @@
+.page,
+.single {
+  .wrapper {
+    & > .content {
+      @apply relative bg-white;
+
+      .post-meta {
+        @apply relative h-20 flex items-center justify-between bg-cyrano-dark gap-6 text-xs text-cyrano-light font-semibold uppercase;
+
+        .next-post,
+        .prev-post {
+          @apply w-12 h-12 flex items-center justify-center;
+        }
+
+        a {
+          @apply opacity-80;
+
+          svg {
+            @apply w-6 h-6 flex items-center justify-center fill-cyrano-light transition-all duration-300 mx-4;
+          }
+
+          &:hover {
+            @apply opacity-100;
+
+            svg {
+              @apply opacity-100 duration-200;
+            }
+          }
+        }
+
+        .details {
+          @apply flex flex-col items-center justify-center gap-1;
+
+          .post-categories {
+            @apply flex items-center justify-center gap-2;
+
+            li {
+              a {
+                @apply relative block bg-cyrano-light text-xxs text-cyrano-dark px-1;
+
+                &::before {
+                  @apply content-['#'] mr-px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .post-thumbnail {
+        @apply mb-12;
+
+        img {
+          @apply w-full h-full object-cover;
+        }
+      }
+
+      .post-title {
+        @apply block text-5xl font-serif text-cyrano-orange text-center mt-8 mb-6;
+      }
+
+      /*.post-meta {
+        @apply flex flex-row items-center justify-center gap-x-6;
+
+        .post-date,
+        .post-edit {
+          @apply flex flex-row items-center gap-x-2 text-sm text-cyrano-dark text-opacity-60;
+        }
+
+        svg {
+          @apply w-4 h-4 fill-cyrano-dark opacity-60;
+        }
+      }*/
+
+      .post-excerpt {
+        @apply p-8;
+      }
+
+      .post-content {
+        @apply text-lg font-light text-cyrano-dark text-opacity-75 leading-8 p-8;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          @apply block font-serif text-cyrano-orange hover:text-opacity-90 mt-8 mb-6;
+        }
+
+        h1 {
+          @apply text-4xl;
+        }
+
+        h2 {
+          @apply text-3xl;
+        }
+
+        h3 {
+          @apply text-2xl;
+        }
+
+        h4 {
+          @apply text-xl;
+        }
+
+        h5 {
+          @apply text-lg;
+        }
+
+        h6 {
+          @apply text-base;
+        }
+
+        p,
+        ul {
+          @apply mb-6;
+        }
+
+        ul {
+          @apply list-disc pl-6;
+        }
+      }
+    }
+  }
+}

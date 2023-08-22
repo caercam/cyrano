@@ -16,9 +16,11 @@ class Cyrano {
    * Singleton.
    */
   public static function get_instance() {
-    if (!self::$_instance instanceof self) {
+
+    if ( ! self::$_instance instanceof self ) {
       self::$_instance = new self;
     }
+
     return self::$_instance;
   }
 
@@ -27,16 +29,28 @@ class Cyrano {
    */
   private function init() {
 
-    add_action( 'after_setup_theme', [$this, 'setup'] );
+    add_action( 'after_setup_theme', [ $this, 'setup' ] );
 
-    add_action( 'wp_enqueue_scripts', [$this, 'enqueue_scripts']);
-    add_action( 'wp_enqueue_scripts', [$this, 'enqueue_styles']);
+    add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+    add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
+
+    add_filter( 'post_thumbnail_html', [ $this, 'default_thumbnail' ], 10, 5 );
+  }
+
+  /**
+   * Load dependencies.
+   */
+  public function load() {
+
+    require_once get_stylesheet_directory() . '/includes/helpers.php';
   }
 
   /**
    * Setup theme.
    */
   public function setup() {
+
+    $this->load();
 
     add_theme_support( 'title-tag' );
     add_theme_support( 'custom-background' );
@@ -102,6 +116,24 @@ class Cyrano {
     wp_register_style( 'cyrano-style', get_stylesheet_uri(), [], wp_get_theme()->get( 'Version' ) );
   }
 
+  public function default_thumbnail( $html, $post_ID, $post_thumbnail_id, $size, $attr ) {
+
+    if ( ! empty( $html ) ) {
+      return $html;
+    }
+  
+    $categories = get_the_category();
+    foreach ( $categories as $category ) {
+      $attachment_id  = get_term_meta( $category->cat_ID, 'category_image', $single = true );
+      $attachment_url = wp_get_attachment_image_url( $attachment_id, $size );
+      if ( $attachment_url ) {
+        return '<img src="' . esc_url( $attachment_url ) . '" alt="' . esc_attr( $attr['alt'] ?? '' ) . '" />';
+      }
+    }
+  
+    return '<img src="' . esc_url( get_theme_file_uri( 'public/img/default.jpg' ) ) . '" alt="' . esc_attr( $attr['alt'] ) . '" />';
+  }
+
   /**
    * Run!
    */
@@ -109,7 +141,6 @@ class Cyrano {
 
     $this->init();
   }
-
 }
 
 $cyrano = Cyrano::get_instance();

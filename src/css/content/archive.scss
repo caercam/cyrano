@@ -1,0 +1,68 @@
+.wrapper {
+  & > .content {
+    @apply relative;
+
+    .archive {
+      @apply relative bg-white p-8;
+
+      .archive-title {
+        @apply flex flex-row items-center justify-center gap-x-3 text-xl text-cyrano-yellow font-medium font-serif mt-6 mb-12;
+
+        svg {
+          @apply w-5 h-5 fill-cyrano-yellow;
+        }
+      }
+
+      .hentry {
+        @apply pb-12;
+
+        .post-thumbnail {
+          @apply relative flex max-h-[32rem] -mx-8 mb-16;
+
+          &::before {
+            mask: linear-gradient(-135deg, transparent 16px, #fff 0) bottom left;
+            @apply content-[''] absolute bottom-0 left-0 right-1/2 h-6 bg-white;
+          }
+
+          &::after {
+            mask: linear-gradient(135deg, transparent 16px, #fff 0) bottom left;
+            @apply content-[''] absolute bottom-0 left-1/2 right-0 h-6 bg-white;
+          }
+
+          img {
+            @apply w-full h-auto object-cover object-center;
+          }
+        }
+
+        .post-title {
+          @apply block text-5xl font-serif text-cyrano-orange hover:text-opacity-90 text-center mt-8 mb-6;
+        }
+
+        .post-meta {
+          @apply flex flex-row items-center justify-center gap-x-6;
+
+          .post-date,
+          .post-edit {
+            @apply flex flex-row items-center gap-x-2 text-sm text-cyrano-dark text-opacity-60;
+          }
+
+          svg {
+            @apply w-4 h-4 fill-cyrano-dark opacity-60;
+          }
+        }
+
+        .post-excerpt {
+          @apply text-lg font-light text-cyrano-dark text-opacity-75 leading-8 p-8;
+        }
+
+        .read-more {
+          @apply w-16 h-16 flex items-center justify-center p-2 mx-auto;
+
+          svg {
+            @apply w-8 h-8 fill-cyrano-orange;
+          }
+        }
+      }
+    }
+  }
+}
