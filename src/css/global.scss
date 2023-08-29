@@ -1,8 +1,13 @@
+
+html {
+  @apply lg:mb-[36rem];
+}
+
 body {
-  @apply relative min-h-screen bg-gradient-to-b from-cyrano-navy to-cyrano-dark font-sans lg:mb-[36rem];
+  @apply relative min-h-screen bg-gradient-to-b from-cyrano-navy to-cyrano-black font-sans;
 
   &::after {
-    @apply lg:content-[''] absolute w-full h-[36rem] bg-plane bg-auto-full bg-no-repeat bg-right-bottom;
+    @apply lg:content-[''] absolute w-full h-[36rem] bg-cyrano-black bg-plane bg-auto-full bg-no-repeat bg-right-bottom z-[-2];
   }
 
   .wrapper {
