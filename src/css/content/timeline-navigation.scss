@@ -22,6 +22,14 @@
             @apply content-[''] absolute left-[calc(50%-2px)] -bottom-0.5 w-2 h-2 bg-cyrano-dark border border-cyrano-light/[.5] ring-4 ring-cyrano-dark rounded-full z-10;
           }
 
+          &.previous-year {
+            @apply mr-auto;
+          }
+
+          &.next-year {
+            @apply ml-auto;
+          }
+
           &.active {
             @apply text-cyrano-orange font-bold;
 
@@ -39,6 +47,9 @@
       & + .timeline {
         @apply md:-mt-8;
       }
+    }
+    .timeline-graph {
+      @apply relative bg-cyrano-dark;
     }
   }
 }

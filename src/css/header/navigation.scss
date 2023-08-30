@@ -34,6 +34,22 @@
             }
           }
 
+          &.current-menu-item {
+            @apply relative;
+
+            &::before {
+              @apply content-[''] absolute -bottom-px left-[calc(50%-.5rem)] border-[.5rem] border-transparent border-b-cyrano-dark;
+            }
+
+            a {
+              @apply text-cyrano-orange;
+
+              &::after {
+                @apply text-cyrano-orange;
+              }
+            }
+          }
+
           &:last-child {
             a {
               @apply border-0;

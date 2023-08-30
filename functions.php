@@ -35,6 +35,7 @@ class Cyrano {
     add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 
     add_filter( 'post_thumbnail_html', [ $this, 'default_thumbnail' ], 10, 5 );
+    add_filter( 'pre_get_posts',       [ $this, 'pre_get_posts' ] );
   }
 
   /**
@@ -132,6 +133,31 @@ class Cyrano {
     }
   
     return '<img src="' . esc_url( get_theme_file_uri( 'public/img/default.jpg' ) ) . '" alt="' . esc_attr( $attr['alt'] ) . '" />';
+  }
+
+  public function pre_get_posts( $wp_query ) {
+
+    if ( ! $wp_query->is_main_query() ) {
+      return;
+    }
+
+    if ( isset( $_GET['categorie'] ) ) {
+      $wp_query->set( 'category_name', $_GET['categorie'] );
+    }
+
+    if ( ! isset( $_GET['annee'] ) && ! isset( $_GET['mois'] ) ) {
+      return;
+    }
+
+    if ( ! $wp_query->is_tag && ! $wp_query->is_category ) {
+      return;
+    }
+
+    $wp_query->set( 'year', $_GET['annee'] );
+
+    if ( isset( $_GET['mois'] ) ) {
+      $wp_query->set( 'monthnum', $_GET['mois'] );
+    }
   }
 
   /**
