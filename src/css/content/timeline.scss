@@ -33,7 +33,7 @@
         @apply relative w-full md:w-1/2 flex flex-col bg-cyrano-light md:bg-transparent my-8 py-4 md:py-0;
 
         img {
-          @apply w-full aspect-video rounded shadow opacity-80 transition-opacity duration-300;
+          @apply w-full aspect-video object-cover rounded shadow opacity-80 transition-opacity duration-300;
         }
 
         &.format-status {
