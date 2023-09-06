@@ -9,8 +9,6 @@
         <div class="post-meta">
           <span class="date"><?php echo get_the_date( 'j F Y' ); ?></span>
           <span class="categories"><?php the_category(); ?></span>
-<?php $count = wp_count_comments( get_the_ID() ); ?>
-          <span class="comments"><?php printf( '%d commentaire%s', $count->approved, 1 < $count->approved ? 's' : '' ); ?></span>
         </div>
         <div class="post-content">
           <?php the_content(); ?>
