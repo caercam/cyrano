@@ -48,8 +48,24 @@
         @apply md:-mt-8;
       }
     }
+
     .timeline-graph {
-      @apply relative bg-cyrano-dark;
+      @apply relative h-12 hidden md:flex items-end justify-between gap-px bg-cyrano-dark pb-7 px-4;
+
+      .dots {
+        @apply w-px h-px bg-white bg-opacity-50 hover:bg-opacity-75 transition-opacity duration-200;
+
+        &.dots-1 {@apply h-[calc(1*4px)]}
+        &.dots-2 {@apply h-[calc(2*4px)]}
+        &.dots-3 {@apply h-[calc(3*4px)]}
+        &.dots-4 {@apply h-[calc(4*4px)]}
+        &.dots-5 {@apply h-[calc(5*4px)]}
+        &.dots-6 {@apply h-[calc(6*4px)]}
+        &.dots-7 {@apply h-[calc(7*4px)]}
+        &.dots-8 {@apply h-[calc(8*4px)]}
+        &.dots-9 {@apply h-[calc(9*4px)]}
+        &.dots-10 {@apply h-[calc(10*4px)]}
+      }
     }
   }
 }

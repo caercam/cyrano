@@ -4,7 +4,7 @@ foreach ( range( 2000, 2024 ) as $y ) :
 endforeach;
 
 get_template_part( 'template-parts/timeline/navigation' );
-get_template_part( 'template-parts/timeline/graph' );
+// get_template_part( 'template-parts/timeline/graph' );
 
 if ( have_posts() ) :
 ?>
