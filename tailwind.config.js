@@ -31,7 +31,8 @@ module.exports = {
         'cyrano-green': '#33cd3d',
       },
       fontFamily: {
-        'sans': ['Open Sans', 'sans-serif'],
+        'sans': ['Lato', 'sans-serif'],
+        'text': ['Roboto', 'sans-serif'],
         'serif': ['Bitter', 'serif'],
       },
       fontSize: {
