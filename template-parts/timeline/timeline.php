@@ -1,7 +1,4 @@
 <?php
-foreach ( range( 2000, 2024 ) as $y ) :
-  //var_dump( $y, get_all_post_months( $y ) );
-endforeach;
 
 get_template_part( 'template-parts/timeline/navigation' );
 // get_template_part( 'template-parts/timeline/graph' );
@@ -17,7 +14,4 @@ while ( have_posts() ) :
 endwhile;
 ?>
       </section>
-      <nav class="pagination">
-<?php get_template_part( 'template-parts/pagination' ); ?>
-      </nav>
 <?php endif; ?>

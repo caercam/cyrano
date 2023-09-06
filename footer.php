@@ -1,6 +1,8 @@
 
+      <nav class="pagination">
+<?php get_template_part( 'template-parts/pagination' ); ?>
+      </nav>
     </main>
-
     <footer class="footer">
       <div class="widgets-area">
         <?php dynamic_sidebar( 'sidebar-footer' ); ?>

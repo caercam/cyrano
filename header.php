@@ -29,14 +29,12 @@
           </a>
         </nav>
         <div class="search-form">
-          <form action="<?php echo esc_url( home_url() ); ?>" method="GET">
-            <input type="search" name="s" placeholder="Rechercher…" value="<?php echo isset( $_GET['s'] ) ? esc_attr( $_GET['s'] ) : ''; ?>" />
-            <input type="submit" value="Rechercher" />
-          </form>
+<?php get_template_part( 'template-parts/search-form' ); ?>
         </div>
         <nav class="navigation">
           <?php wp_nav_menu( [
             'container' => '',
+            'theme_location' => 'primary',
           ] ); ?>
         </nav>
       </header>

@@ -68,6 +68,7 @@ class Cyrano {
 	  add_image_size( 'cyrano-index-thumb-2', 960, 360 );
 
   	register_nav_menus( [
+  		'actions' => 'Menu actions',
   		'primary' => 'Menu principal',
   	] );
 
@@ -132,7 +133,7 @@ class Cyrano {
       }
     }
   
-    return '<img src="' . esc_url( get_theme_file_uri( 'public/img/default.jpg' ) ) . '" alt="' . esc_attr( $attr['alt'] ) . '" />';
+    return '<img src="' . esc_url( get_theme_file_uri( 'dist/images/default.jpg' ) ) . '" alt="' . esc_attr( $attr['alt'] ?? '' ) . '" />';
   }
 
   public function pre_get_posts( $wp_query ) {

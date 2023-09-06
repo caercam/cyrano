@@ -1,5 +1,5 @@
 .wrapper {
   & > .footer {
-    @apply flex flex-col bg-footer bg-bottom mt-auto;
+    @apply flex flex-col bg-footer bg-bottom bg-no-repeat bg-cover mt-auto;
   }
 }

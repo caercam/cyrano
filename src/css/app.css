@@ -14,8 +14,10 @@
 @import "footer/widgets-area.scss";
 @import "footer/legal.scss";
 
-@import "content/timeline-navigation.scss";
-@import "content/timeline.scss";
+@import "content/404.scss";
 @import "content/archive.scss";
 @import "content/single.scss";
 @import "content/pagination.scss";
+@import "content/search.scss";
+@import "content/timeline-navigation.scss";
+@import "content/timeline.scss";

@@ -19,7 +19,7 @@ module.exports = {
       },
       colors: {
         'cyrano-light': '#efefff',
-        'cyrano-black': '#06090e',
+        'cyrano-black': '#060a0f',
         'cyrano-dark': '#121c2c',
         'cyrano-navy': '#18273c',
         'cyrano-gray': '#aaaabb',

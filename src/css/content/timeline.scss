@@ -33,54 +33,52 @@
         @apply relative w-full md:w-1/2 flex flex-col bg-cyrano-light md:bg-transparent my-8 py-4 md:py-0;
 
         img {
-          @apply w-full rounded shadow opacity-80 transition-opacity duration-300;
+          @apply w-full aspect-video rounded shadow opacity-80 transition-opacity duration-300;
         }
 
-        /*&.format-status {*/
-          /*.post-title,
+        &.format-status {
+          img {
+            @apply aspect-auto;
+          }
+        }
+
+        .post-title {
+          @apply text-center px-2;
+        }
+
+        .post-content {
+          @apply order-first text-cyrano-dark text-center leading-4 opacity-80 px-2 mb-1;
+        }
+
+        .post-date {
+          @apply order-2 text-xs text-cyrano-dark leading-none text-center opacity-60 px-2 mb-4;
+        }
+
+        .post-thumbnail {
+          @apply order-3;
+        }
+
+        .post-excerpt {
+          @apply order-4 text-sm text-cyrano-dark/[.75] my-2;
+        }
+
+        &:nth-child(odd) {
+          .post-title,
+          .post-content,
           .post-excerpt,
-          .read-more {
-            @apply hidden;
-          }*/
-
-          .post-title {
-            @apply text-center px-2;
-          }
-
-          .post-content {
-            @apply order-first text-cyrano-dark text-center leading-4 opacity-80 px-2 mb-1;
-          }
-
           .post-date {
-            @apply order-2 text-xs text-cyrano-dark leading-none text-center opacity-60 px-2 mb-4;
+            @apply md:text-left;
           }
+        }
 
-          .post-thumbnail {
-            @apply order-3;
+        &:nth-child(even) {
+          .post-title,
+          .post-content,
+          .post-excerpt,
+          .post-date {
+            @apply md:text-right;
           }
-
-          .post-excerpt {
-            @apply order-4 text-sm text-cyrano-dark/[.75] my-2;
-          }
-
-          &:nth-child(odd) {
-            .post-title,
-            .post-content,
-            .post-excerpt,
-            .post-date {
-              @apply md:text-left;
-            }
-          }
-
-          &:nth-child(even) {
-            .post-title,
-            .post-content,
-            .post-excerpt,
-            .post-date {
-              @apply md:text-right;
-            }
-          }
-        /*}*/
+        }
 
         &:hover {
           img {

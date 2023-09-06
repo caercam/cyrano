@@ -1,0 +1,24 @@
+
+.wrapper {
+    & > .content {
+        .search {
+            @apply p-8;
+
+            form {
+                @apply w-full max-w-3xl flex items-center justify-center my-8 mx-auto;
+
+                input {
+                    @apply h-12 flex items-center justify-center px-8;
+
+                    &[type="search"] {
+                        @apply w-full bg-white;
+                    }
+
+                    &[type="submit"] {
+                        @apply bg-cyrano-teal hover:bg-cyrano-orange font-semibold text-white transition-colors duration-200 cursor-pointer;
+                    }
+                }
+            }
+        }
+    }
+}

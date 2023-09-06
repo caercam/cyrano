@@ -3,12 +3,12 @@
     .timeline-navigation {
       @apply relative bg-cyrano-dark;
 
-      .line {
-        @apply absolute bottom-[calc(1.5rem+1px)] left-4 right-4 h-0.5 bg-cyrano-light/[.5] rounded-full;
-      }
-
-      nav {
+      .navigation {
         @apply relative h-20 flex items-center justify-start md:justify-center gap-6 overflow-auto px-8;
+
+        .line {
+          @apply absolute bottom-[calc(1.5rem+1px)] left-4 right-4 h-0.5 bg-cyrano-light/[.5] rounded-full;
+        }
 
         a,
         span {
@@ -45,7 +45,11 @@
       }
 
       & + .timeline {
-        @apply md:-mt-8;
+        @apply md:pt-8;
+
+        &::before {
+          @apply top-4;
+        }
       }
     }
 
