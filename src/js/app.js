@@ -20,3 +20,13 @@ if (searchToggle) {
         }
     })
 }
+
+const activityDots = document.querySelectorAll('.activity .year .dots .dot')
+if (activityDots.length) {
+    activityDots.forEach(dot => {
+        let date = dot.dataset.date
+        if (date) {
+            dot.addEventListener('click', () => window.location.href = `/${date.replaceAll('-','/')}`)
+        }
+    });
+}

@@ -2,6 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "microtip/microtip";
+
 @import "global.scss";
 @import "ui.scss";
 
@@ -15,6 +17,7 @@
 @import "footer/legal.scss";
 
 @import "content/404.scss";
+@import "content/activity.scss";
 @import "content/archive.scss";
 @import "content/single.scss";
 @import "content/pagination.scss";
