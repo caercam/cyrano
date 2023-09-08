@@ -1,7 +1,7 @@
 .wrapper {
   & > .content {
     .pagination {
-      @apply relative h-24 flex flex-row items-center justify-between bg-cyrano-black;
+      @apply relative min-h-[6rem] flex flex-row items-center justify-between bg-cyrano-black;
 
       .nav-next,
       .nav-previous {
@@ -32,10 +32,10 @@
       }
 
       .menu {
-        @apply relative w-full flex items-center justify-center gap-4;
+        @apply relative w-full flex flex-col md:flex-row items-center justify-center gap-4 py-8 md:p-0;
 
         &::before {
-          @apply content-[''] absolute inset-x-8 md:inset-x-24 h-0.5 bg-cyrano-light/[.5] rounded-full pointer-events-none z-20;
+          @apply content-[''] absolute inset-x-8 md:inset-x-24 h-0.5 bg-cyrano-light/[.5] rounded-full pointer-events-none -mt-px md:mt-0 z-20;
         }
 
         .menu-item {

@@ -1,6 +1,6 @@
 
+    <div class="line"></div>
     <div class="navigation">
-      <div class="line"></div>
 <?php foreach ( get_all_post_years() as $year => $total ) : ?>
 <?php if ( $total ) : ?>
 <?php

@@ -1,6 +1,6 @@
 
     <div class="line"></div>
-    <nav>
+    <div class="navigation">
 <?php if ( $args['year'] < date( 'Y' ) ) : ?>
         <a class="previous-year" href="<?php echo esc_url( get_year_link( $args['year'] - 1 ) ); ?>"><?php echo esc_html( $args['year'] - 1 ); ?></a>
 <?php endif; ?>
@@ -28,4 +28,4 @@ endif;
 <?php if ( $args['year'] < date( 'Y' ) ) : ?>
         <a class="next-year" href="<?php echo esc_url( get_year_link( $args['year'] + 1 ) ); ?>"><?php echo esc_html( $args['year'] + 1 ); ?></a>
 <?php endif; ?>
-    </nav>
+    </div>

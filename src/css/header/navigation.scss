@@ -65,11 +65,7 @@
 
 
     & > .mobile-navigation {
-      @apply relative h-16 flex flex-row items-center sm:hidden bg-gradient-to-b from-teal-700 to-teal-600;
-
-      &::after {
-        @apply content-[''] absolute left-1/2 -bottom-8 h-0 w-0 border border-transparent border-[1rem] border-t-teal-600 -ml-4;
-      }
+      @apply h-16 flex flex-row items-center sm:hidden bg-cyrano-blue;
 
       a {
         @apply w-1/2 flex items-center justify-center;
