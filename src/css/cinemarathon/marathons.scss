@@ -1,0 +1,115 @@
+.wp-block-cinemarathon-marathons {
+  &.mode-grid {
+    .marathon {
+      a {
+        &::before {
+          @apply bg-gradient-to-t from-cyrano-dark to-transparent bg-cover bg-center;
+        }
+
+        &:hover {
+          @apply bg-gradient-to-t from-cyrano-black/[.75] to-transparent bg-cover bg-center;
+        }
+
+        .progress {
+			    @apply relative w-full flex items-center text-[40%] z-10;
+
+          .bar {
+            @apply relative w-3/5 max-w-xl min-w-[10rem] h-3 flex items-center justify-center bg-cyrano-dark/[.75] font-medium rounded-xl px-1;
+
+            & > span {
+              @apply absolute left-px w-[calc(var(--marathon-progress,0%)-2px)] min-w-[.625rem] h-2.5 bg-cyrano-orange rounded-xl z-10;
+            }
+          }
+
+          .score {
+            @apply font-medium ml-1;
+          }
+        }
+      }
+    }
+
+    &[data-grid-columns="1"] {
+      .marathon {
+        a {
+          @apply p-14;
+
+          .title {
+            @apply text-[2.25rem] font-light
+          }
+
+          .progress {
+            @apply flex-col items-start gap-1;
+
+            .bar {
+              @apply h-4;
+
+              & > span {
+                @apply left-1 w-[calc(var(--marathon-progress,0%)-7px)];
+              }
+            }
+
+            .score {
+              @apply ml-px
+            }
+          }
+        }
+      }
+    }
+
+    &[data-grid-columns="2"] {
+      .marathon {
+        a {
+          @apply p-8;
+
+          .title {
+            @apply text-[1.75rem] font-light
+          }
+
+          .progress {
+            @apply flex-col items-start gap-1;
+
+            .bar {
+              @apply h-2.5;
+
+              & > span {
+                @apply h-2;
+              }
+            }
+
+            .score {
+              @apply ml-px
+            }
+          }
+        }
+      }
+    }
+
+    &[data-grid-columns="3"] {
+      .marathon {
+        a {
+          @apply p-6;
+
+          .title {
+            @apply text-[1.25rem]
+          }
+
+          .progress {
+            @apply flex-col items-start gap-1;
+            
+            .bar {
+              @apply w-full max-w-none h-2;
+
+              & > span {
+                @apply h-1.5
+              }
+            }
+
+            .score {
+              @apply ml-px
+            }
+          }
+        }
+      }
+    }
+  }
+}

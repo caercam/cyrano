@@ -26,3 +26,6 @@
 @import "content/search.scss";
 @import "content/timeline-navigation.scss";
 @import "content/timeline.scss";
+
+@import "cinemarathon/marathons.scss";
+@import "cinemarathon/marathon.scss";

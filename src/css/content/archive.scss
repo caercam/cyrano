@@ -6,10 +6,10 @@
       @apply relative bg-white p-8;
 
       .archive-title {
-        @apply flex flex-row items-center justify-center gap-x-3 text-xl text-cyrano-yellow font-medium font-serif mt-6 mb-12;
+        @apply flex flex-row items-center justify-center gap-x-3 text-xl text-cyrano-gold font-medium font-serif mt-6 mb-12;
 
         svg {
-          @apply w-5 h-5 fill-cyrano-yellow;
+          @apply w-5 h-5 fill-cyrano-gold;
         }
       }
 

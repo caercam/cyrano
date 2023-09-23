@@ -1,0 +1,134 @@
+.wp-block-cinemarathon-marathon {
+  .marathon-content {
+    @apply relative pl-20;
+
+    &::before {
+      @apply content-[''] absolute bottom-10 top-12 left-6 w-0.5 bg-cyrano-gray -ml-px;
+    }
+
+    .marker {
+      @apply relative flex items-center text-center py-1 -ml-20;
+
+      a {
+        @apply relative h-6 flex items-center justify-center bg-cyrano-blue hover:bg-cyrano-orange text-xxs text-white font-semibold uppercase px-4;
+
+        &::after {
+          @apply content-[''] absolute border-[.5rem] border-transparent border-t-cyrano-blue -bottom-4 left-4;
+        }
+
+        &:hover {
+          &::after {
+            @apply border-t-cyrano-orange;
+          }
+        }
+      }
+    }
+
+    h2 + p,
+    h3 + p,
+    h4 + p {
+      @apply text-sm -mt-6;
+    }
+
+    & > h1,
+    & > h2,
+    & > h3,
+    & > h4 {
+      @apply relative;
+
+      &::before {
+        @apply md:content-[''] absolute -left-12 top-4 w-7 h-0.5 bg-cyrano-gray;
+      }
+
+      &::after {
+        @apply md:content-[''] absolute -left-[calc(3.75rem+1px)] top-3 w-2.5 h-2.5 bg-white border-2 border-cyrano-gray ring ring-white rounded-full;
+      }
+    }
+
+    .details {
+      @apply bg-cyrano-light text-sm p-8 my-4 -ml-4;
+
+      h1, h2, h3, h4, p {
+        @apply mb-2 mt-0 !important
+      }
+    }
+
+    .items {
+
+      ul {
+        @apply relative bg-cyrano-dark text-white py-4 my-8 -ml-20;
+
+        &::before {
+          @apply content-[''] absolute -inset-y-4 w-0.5 bg-white -ml-px;
+        }
+
+        &::after {
+          @apply content-[''] absolute inset-y-[calc(1.75rem+3px)] w-8 border-2 border-white border-l-cyrano-dark rounded-r-lg -ml-px;
+        }
+
+        li {
+          @apply relative list-none flex items-center gap-8 ml-[calc(4.5rem-2px)];
+
+          &::before {
+            @apply content-[''] absolute -left-8 top-4 w-4 h-0.5 bg-white -mt-px
+          }
+
+          &::after {
+            @apply content-[''] absolute -left-[calc(2.75rem+1px)] top-[calc(.625rem+1px)] w-2.5 h-2.5 bg-cyrano-dark border-2 border-white ring ring-cyrano-dark rounded-full z-10;
+          }
+
+          .item-availability,
+          .item-title {
+            @apply relative;
+
+            &::before {
+              @apply content-[''] absolute -left-5 top-1/2 w-2 h-px bg-white;
+            }
+          }
+
+          .item-status {
+            svg {
+              @apply w-5 h-5;
+            }
+
+            &.not-watched {
+              svg {
+                @apply fill-cyrano-red;
+              }
+            }
+
+            &.is-rewatch {
+              svg {
+                @apply fill-cyrano-yellow;
+              }
+            }
+
+            &.has-been-watched {
+              svg {
+                @apply fill-cyrano-green;
+              }
+            }
+          }
+
+          .item-availability {
+            svg {
+              @apply w-6 h-6;
+            }
+
+            &.is-available {
+              svg {
+                @apply fill-cyrano-green;
+              }
+            }
+
+            &.not-available {
+              svg {
+                @apply fill-cyrano-red;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
