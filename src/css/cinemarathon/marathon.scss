@@ -51,6 +51,24 @@
       h1, h2, h3, h4, p {
         @apply mb-2 mt-0 !important
       }
+
+      ul {
+        @apply pl-0 ml-0 !important;
+
+        li {
+          @apply list-disc flex items-center gap-1;
+
+          .item-availability {
+            svg {
+              @apply w-5 h-5
+            }
+
+            &::before {
+              @apply hidden
+            }
+          }
+        }
+      }
     }
 
     .items {
@@ -76,57 +94,57 @@
           &::after {
             @apply content-[''] absolute -left-[calc(2.75rem+1px)] top-[calc(.625rem+1px)] w-2.5 h-2.5 bg-cyrano-dark border-2 border-white ring ring-cyrano-dark rounded-full z-10;
           }
+        }
+      }
+    }
 
-          .item-availability,
-          .item-title {
-            @apply relative;
+    .item-availability,
+    .item-title {
+      @apply relative;
 
-            &::before {
-              @apply content-[''] absolute -left-5 top-1/2 w-2 h-px bg-white;
-            }
-          }
+      &::before {
+        @apply content-[''] absolute -left-5 top-1/2 w-2 h-px bg-white;
+      }
+    }
 
-          .item-status {
-            svg {
-              @apply w-5 h-5;
-            }
 
-            &.not-watched {
-              svg {
-                @apply fill-cyrano-red;
-              }
-            }
+    .item-availability,
+    .item-status {
+      svg {
+        @apply w-5 h-5;
+      }
+    }
 
-            &.is-rewatch {
-              svg {
-                @apply fill-cyrano-yellow;
-              }
-            }
+    .item-status {
+      &.not-watched {
+        svg {
+          @apply fill-cyrano-red;
+        }
+      }
 
-            &.has-been-watched {
-              svg {
-                @apply fill-cyrano-green;
-              }
-            }
-          }
+      &.is-rewatch {
+        svg {
+          @apply fill-cyrano-yellow;
+        }
+      }
 
-          .item-availability {
-            svg {
-              @apply w-6 h-6;
-            }
+      &.has-been-watched {
+        svg {
+          @apply fill-cyrano-green;
+        }
+      }
+    }
 
-            &.is-available {
-              svg {
-                @apply fill-cyrano-green;
-              }
-            }
+    .item-availability {
+      &.is-available {
+        svg {
+          @apply fill-cyrano-green;
+        }
+      }
 
-            &.not-available {
-              svg {
-                @apply fill-cyrano-red;
-              }
-            }
-          }
+      &.not-available {
+        svg {
+          @apply fill-cyrano-red;
         }
       }
     }

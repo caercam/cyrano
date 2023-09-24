@@ -1,5 +1,5 @@
 
-<div class="wp-block-cinemarathon-marathon">
+<div id="<?php echo esc_attr( $block->attributes['id'] ); ?>" class="wp-block-cinemarathon-marathon">
     <div class="marathon-header">
         <img src="<?php echo esc_url( $block->data['image'] ); ?>" alt="<?php echo esc_html( $block->attributes['title'] ); ?>">
     </div>
@@ -18,11 +18,11 @@
 <?php endif; ?>
             <h4>Légende</h4>
             <ul>
-                <li><?php printf( __( '%s: Seen this one before, to be watched again', 'cinemarathon' ), '🟠' ); ?></li>
-                <li><?php printf( __( '%s: Not watched (yet)!', 'cinemarathon' ), '🔴' ); ?></li>
-                <li><?php printf( __( '%s: Watched!', 'cinemarathon' ), '🟢' ); ?></li>
-                <li><?php printf( __( '%s: Available for watching', 'cinemarathon' ), '📀' ); ?></li>
-                <li><?php printf( __( '%s: Unavailable for watching', 'cinemarathon' ), '💸' ); ?></li>
+                <li><?php printf( __( '%s: Seen this one before, to be watched again', 'cinemarathon' ), '<span class="item-status is-rewatch">' . get_the_theme_svg( 'double-check' ) . '</span>' ); ?></li>
+                <li><?php printf( __( '%s: Not watched (yet)!', 'cinemarathon' ), '<span class="item-status not-watched">' . get_the_theme_svg( 'check' ) . '</span>' ); ?></li>
+                <li><?php printf( __( '%s: Watched!', 'cinemarathon' ), '<span class="item-status has-been-watched">' . get_the_theme_svg( 'check' ) . '</span>' ); ?></li>
+                <li><?php printf( __( '%s: Available for watching', 'cinemarathon' ), '<span class="item-availability is-available">' . get_the_theme_svg( 'dvd-check' ) . '</span>' ); ?></li>
+                <li><?php printf( __( '%s: Unavailable for watching', 'cinemarathon' ), '<span class="item-availability not-available">' . get_the_theme_svg( 'dvd-no' ) . '</span>' ); ?></li>
             </ul>
 <?php if ( ! empty( $block->attributes['comments'] ) ) : ?>
             <h3>Commentaires</h3>
