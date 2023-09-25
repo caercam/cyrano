@@ -1,13 +1,15 @@
 .wp-block-cinemarathon-marathon {
+  @apply -mx-8 md:mx-0;
+
   .marathon-content {
-    @apply relative pl-20;
+    @apply relative pl-12 md:pl-20;
 
     &::before {
       @apply content-[''] absolute bottom-10 top-12 left-6 w-0.5 bg-cyrano-gray -ml-px;
     }
 
     .marker {
-      @apply relative flex items-center text-center py-1 -ml-20;
+      @apply relative flex items-center text-center py-1 -ml-12 md:-ml-20;
 
       a {
         @apply relative h-6 flex items-center justify-center bg-cyrano-blue hover:bg-cyrano-orange text-xxs text-white font-semibold uppercase px-4;
@@ -46,7 +48,7 @@
     }
 
     .details {
-      @apply bg-cyrano-light/[.75] text-sm p-8 my-4 -ml-4;
+      @apply bg-cyrano-light/[.75] text-sm p-8 my-4 md:-ml-4;
 
       h1, h2, h3, h4, p {
         @apply mb-2 mt-0 !important
@@ -74,25 +76,25 @@
     .items {
 
       ul {
-        @apply relative bg-cyrano-light text-cyrano-dark py-4 my-8 -ml-20;
+        @apply relative bg-cyrano-light text-cyrano-dark py-4 my-8 -ml-12 md:-ml-20;
 
         &::before {
           @apply content-[''] absolute inset-y-0 w-0.5 bg-cyrano-blue -ml-px;
         }
 
         &::after {
-          @apply content-[''] absolute inset-y-[calc(1.75rem+3px)] w-8 border-2 border-cyrano-blue border-l-cyrano-light rounded-r-lg -ml-px;
+          @apply content-[''] absolute inset-y-[calc(1.75rem+3px)] md:w-8 border-l-2 md:border-2 border-cyrano-blue  border-l-cyrano-blue md:border-l-cyrano-light rounded-r-lg -ml-px;
         }
 
         li {
-          @apply relative h-8 list-none flex items-center gap-8 ml-[calc(4.5rem-2px)];
+          @apply relative h-8 list-none flex items-center gap-4 md:gap-8 ml-8 md:ml-[calc(4.5rem-2px)];
 
           &::before {
-            @apply content-[''] absolute -left-8 top-4 w-4 h-0.5 bg-cyrano-blue -mt-px
+            @apply content-[''] absolute -left-6 md:-left-8 top-4 w-4 h-0.5 bg-cyrano-blue -mt-px
           }
 
           &::after {
-            @apply content-[''] absolute -left-[calc(2.75rem+1px)] top-[calc(.625rem+1px)] w-2.5 h-2.5 bg-cyrano-light border-2 border-cyrano-blue ring ring-cyrano-light rounded-full z-10;
+            @apply content-[''] absolute -left-[calc(2.25rem+1px)] md:-left-[calc(2.75rem+1px)] top-[calc(.625rem+1px)] w-2.5 h-2.5 bg-cyrano-light border-2 border-cyrano-blue ring ring-cyrano-light rounded-full z-10;
           }
         }
       }
@@ -103,12 +105,12 @@
       @apply relative;
 
       &::before {
-        @apply content-[''] absolute -left-5 top-1/2 w-2 h-px bg-cyrano-blue;
+        @apply content-[''] md:absolute -left-5 top-1/2 w-2 h-px bg-cyrano-blue;
       }
     }
 
     .item-title {
-      @apply text-base
+      @apply text-base leading-4 truncate
     }
 
     .item-availability,
