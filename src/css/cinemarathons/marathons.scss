@@ -1,5 +1,5 @@
-.wp-block-cinemarathon-marathons {
-  &.mode-grid {
+.wp-block-cinemarathons-marathons {
+  & > .marathons-grid {
     .marathon {
       a {
         &::before {

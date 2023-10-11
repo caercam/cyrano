@@ -27,5 +27,5 @@
 @import "content/timeline-navigation.scss";
 @import "content/timeline.scss";
 
-@import "cinemarathon/marathons.scss";
-@import "cinemarathon/marathon.scss";
+@import "cinemarathons/marathons.scss";
+@import "cinemarathons/marathon.scss";

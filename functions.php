@@ -1,6 +1,11 @@
 <?php
-
-class Cyrano {
+/**
+ * Define the theme class.
+ *
+ * @since 2.0.0
+ * @author Charlie Merland <charlie@caercam.org>
+ */
+final class Cyrano {
 
   /**
    * @var self
@@ -9,11 +14,17 @@ class Cyrano {
 
   /**
    * Class constructor.
+   * 
+   * @since 2.0.0
+   * @access private
    */
   private function __construct() {}
 
   /**
    * Singleton.
+   * 
+   * @since 2.0.0
+   * @access public
    */
   public static function get_instance() {
 
@@ -26,6 +37,9 @@ class Cyrano {
 
   /**
    * Initialize the theme.
+   * 
+   * @since 2.0.0
+   * @access private
    */
   private function init() {
 
@@ -36,10 +50,15 @@ class Cyrano {
 
     add_filter( 'post_thumbnail_html', [ $this, 'default_thumbnail' ], 10, 5 );
     add_filter( 'pre_get_posts',       [ $this, 'pre_get_posts' ] );
+
+    add_filter( 'block_type_metadata_settings', [ $this, 'custom_cinemarathons_block_templates' ], 10, 2 );
   }
 
   /**
    * Load dependencies.
+   * 
+   * @since 2.0.0
+   * @access public
    */
   public function load() {
 
@@ -48,6 +67,9 @@ class Cyrano {
 
   /**
    * Setup theme.
+   * 
+   * @since 2.0.0
+   * @access public
    */
   public function setup() {
 
@@ -84,6 +106,9 @@ class Cyrano {
 
   /**
    * Enqueue the theme's scripts.
+   * 
+   * @since 2.0.0
+   * @access public
    */
   public function enqueue_scripts() {
 
@@ -94,6 +119,9 @@ class Cyrano {
 
   /**
    * Enqueue the theme's styles.
+   * 
+   * @since 2.0.0
+   * @access public
    */
   public function enqueue_styles() {
 
@@ -104,6 +132,9 @@ class Cyrano {
 
   /**
    * Register the theme's scripts.
+   * 
+   * @since 2.0.0
+   * @access private
    */
   private function register_scripts() {
 
@@ -112,12 +143,28 @@ class Cyrano {
 
   /**
    * Register the theme's styles.
+   * 
+   * @since 2.0.0
+   * @access private
    */
   private function register_styles() {
 
     wp_register_style( 'cyrano-style', get_stylesheet_uri(), [], wp_get_theme()->get( 'Version' ) );
   }
 
+  /**
+   * Set a default post thumbnail depending on post category.
+   * 
+   * @since 2.0.0
+   * @access public
+   * 
+   * @param  string $html
+   * @param  int    $post_ID,
+   * @param  int    $post_thumbnail_id,
+   * @param  string $size,
+   * @param  array  $attr,
+   * @return string
+   */
   public function default_thumbnail( $html, $post_ID, $post_thumbnail_id, $size, $attr ) {
 
     if ( ! empty( $html ) ) {
@@ -136,6 +183,14 @@ class Cyrano {
     return '<img src="' . esc_url( get_theme_file_uri( 'dist/images/default.jpg' ) ) . '" alt="' . esc_attr( $attr['alt'] ?? '' ) . '" />';
   }
 
+  /**
+   * Custom query filters.
+   * 
+   * @since 2.0.0
+   * @access public
+   * 
+   * @param  WP_Query $wp_query
+   */
   public function pre_get_posts( $wp_query ) {
 
     if ( ! $wp_query->is_main_query() ) {
@@ -162,7 +217,29 @@ class Cyrano {
   }
 
   /**
+   * Override Cinemarathons block templates.
+   * 
+   * @since 2.1.0
+   * @access public
+   * 
+   * @param  array $settings
+   * @param  array $metadata
+   * @return array
+   */
+  public function custom_cinemarathons_block_templates( $settings, $metadata ) {
+
+    if ( 'cinemarathons' === $metadata['category'] && is_callable( '\Cinemarathons\cinemarathons' ) ) {
+      $settings['render_callback'] = [ \Cinemarathons\cinemarathons(), 'use_theme_block_templates' ];
+    }
+
+    return $settings;
+  }
+
+  /**
    * Run!
+   * 
+   * @since 2.0.0
+   * @access public
    */
   public function run() {
 
