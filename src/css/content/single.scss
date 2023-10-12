@@ -78,6 +78,24 @@
       .post-content {
         @apply font-text text-lg text-cyrano-dark text-opacity-75 leading-8 m-8;
 
+        a {
+          @apply relative text-cyrano-orange;
+
+          &::before {
+            @apply absolute content-[''] bottom-0 -left-0.5 w-0 h-px bg-cyrano-orange transition-all duration-200;
+          }
+
+          &:hover {
+              @apply text-white transition-colors delay-200 duration-200 z-[1];
+
+              &::before {
+                  transition-delay: 0s, 200ms;
+                  transition-property: width, height;
+                  @apply w-[calc(100%+.125rem)] h-full -z-[1];
+              }
+          }
+        }
+
         h1,
         h2,
         h3,
