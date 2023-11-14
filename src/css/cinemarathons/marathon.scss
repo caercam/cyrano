@@ -12,15 +12,20 @@
       @apply relative flex items-center text-center py-1 -ml-12 md:-ml-20;
 
       a {
-        @apply relative h-6 flex items-center justify-center bg-cyrano-blue hover:bg-cyrano-orange text-xxs text-white font-semibold uppercase px-4;
+        @apply relative h-6 flex items-center justify-center bg-cyrano-blue hover:bg-cyrano-orange text-xxs font-semibold uppercase px-4;
+        @apply text-white !important;
+
+        &::before {
+          @apply hidden
+        }
 
         &::after {
-          @apply content-[''] absolute border-[.5rem] border-transparent border-t-cyrano-blue -bottom-4 left-4;
+          @apply content-[''] absolute -bottom-4 left-4 border-[.5rem] border-transparent border-t-cyrano-blue transition-all duration-300;
         }
 
         &:hover {
           &::after {
-            @apply border-t-cyrano-orange;
+            @apply border-t-cyrano-orange transition-all duration-300 delay-150;
           }
         }
       }

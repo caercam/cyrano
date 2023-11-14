@@ -2,8 +2,11 @@
   & > .marathons-grid {
     .marathon {
       a {
+        @apply h-full text-white !important;
+
         &::before {
           @apply bg-gradient-to-t from-cyrano-dark to-transparent bg-cover bg-center;
+          @apply w-full h-full bg-transparent !important;
         }
 
         &:hover {
