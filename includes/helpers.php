@@ -1,5 +1,29 @@
 <?php
 
+function get_total_posts_from_category_for_year( $category, $year ) {
+
+    $query = new WP_Query( [
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'year' => $year,
+        'tax_query' => [
+            [
+                'taxonomy' => 'post_format',
+                'field' => 'slug',
+                'terms' => [ 'post-format-status' ],
+            ],
+            [
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => [ $category ],
+            ]
+        ],
+        'rields' => 'ids',
+    ] );
+
+    return $query->found_posts;
+}
+
 function get_all_post_years() {
 
     global $wpdb;

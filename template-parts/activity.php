@@ -6,6 +6,12 @@
                 <a href="<?php echo esc_url( get_year_link( $year ) ); ?>"><?php echo esc_html( $year ); ?></a>
                 <span><?php printf( '<strong>%s</strong>&nbsp; publication%s', $total, 1 < $total ? 's' : '' ); ?></span>
               </div>
+              <div class="resume">
+                <div class="content">
+                  <span><strong><?php echo esc_html( number_format_i18n( get_total_posts_from_category_for_year( category: 'cinema', year: $year ) ) ); ?></strong> film(s)</span>
+                  <span><strong><?php echo esc_html( number_format_i18n( get_total_posts_from_category_for_year( category: 'series', year: $year ) ) ); ?></strong> épisodes(s)</span>
+                </div>
+              </div>
               <div class="dots">
 <?php foreach ( get_year_graph( $year ) as $day => $total ) : ?>
 <?php if ( $total ) : ?>
