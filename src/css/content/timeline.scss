@@ -50,8 +50,27 @@
           @apply order-first text-cyrano-dark text-center leading-4 opacity-80 px-2 mb-1;
         }
 
-        .post-date {
-          @apply order-2 text-xs text-cyrano-dark leading-none text-center opacity-60 px-2 mb-4;
+        .post-meta {
+          @apply flex items-center justify-center gap-4 order-2 text-xs text-cyrano-dark leading-none text-center px-2 mb-4;
+
+          .post-date {
+            @apply opacity-75;
+          }
+
+          .post-rating {
+
+            .stars {
+              @apply relative flex items-center;
+
+              &::before {
+                @apply content-[''] absolute -left-3 w-2 h-px bg-cyrano-gray;
+              }
+
+              svg {
+                @apply w-3.5 h-3.5 fill-cyrano-orange;
+              }
+            }
+          }
         }
 
         .post-thumbnail {
@@ -65,18 +84,38 @@
         &:nth-child(odd) {
           .post-title,
           .post-content,
-          .post-excerpt,
-          .post-date {
+          .post-excerpt {
             @apply md:text-left;
+          }
+
+          .post-meta {
+            @apply md:justify-start;
           }
         }
 
         &:nth-child(even) {
           .post-title,
           .post-content,
-          .post-excerpt,
-          .post-date {
+          .post-excerpt {
             @apply md:text-right;
+          }
+
+          .post-meta {
+            @apply md:justify-end;
+
+            .post-date {
+              @apply order-2;
+            }
+
+            .post-rating {
+              @apply order-1;
+
+              .stars {
+                &::before {
+                  @apply left-auto -right-3;
+                }
+              }
+            }
           }
         }
 

@@ -17,6 +17,9 @@
         <div class="post-meta">
           <span class="date"><?php echo get_the_date( 'j F Y' ); ?></span>
           <span class="categories"><?php the_category(); ?></span>
+<?php if ( has_term( taxonomy: 'rating' ) ) : ?>
+          <div class="rating"><?php echo get_the_rating(); ?></div>
+<?php endif; ?>
         </div>
         <div class="post-content">
           <?php the_content(); ?>
