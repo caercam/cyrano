@@ -150,6 +150,22 @@
           @apply list-disc pl-6;
         }
       }
+
+      .post.category-series.format-status {
+        .post-content {
+          a {
+            @apply text-current !important;
+
+            &:hover {
+              @apply text-cyrano-orange !important;
+            }
+
+            &::before {
+              @apply hidden;
+            }
+          }
+        }
+      }
     }
   }
 }
