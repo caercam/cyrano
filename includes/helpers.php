@@ -1,5 +1,54 @@
 <?php
 
+function get_full_year_calendar( $year ) {
+
+    $calendar = array();
+
+    // Loop through each month
+    for ($month = 1; $month <= 12; $month++) {
+        // Get the number of days in the month
+        $numDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+
+        // Initialize the month array
+        $calendar[$month] = array();
+
+        // Get the first day of the month
+        $firstDayOfWeek = date('N', strtotime("$year-$month-01"));
+
+        // Initialize the week array
+        $week = 1;
+        $calendar[$month][$week] = array();
+
+        // Add empty days for days before the first day of the month
+        for ($i = 1; $i < $firstDayOfWeek; $i++) {
+            $calendar[$month][$week][$i] = 0;
+        }
+
+        // Loop through each day of the month
+        for ($day = 1; $day <= $numDays; $day++) {
+            // Add the day to the calendar
+            $calendar[$month][$week][$firstDayOfWeek] = $day;
+
+            // Increment the day and the day of the week
+            $firstDayOfWeek++;
+            // If it's Sunday (7), start a new week
+            if ($firstDayOfWeek == 8) {
+                $firstDayOfWeek = 1;
+                $week++;
+                $calendar[$month][$week] = array();
+            }
+        }
+
+        // Add empty days for days after the last day of the month
+        while ($firstDayOfWeek <= 7) {
+            $calendar[$month][$week][$firstDayOfWeek] = 0;
+            $firstDayOfWeek++;
+        }
+    }
+
+    return $calendar;
+}
+
 function get_the_rating( $post = null ) {
 
     $post = get_post( $post );
