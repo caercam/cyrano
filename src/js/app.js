@@ -21,7 +21,7 @@ if (searchToggle) {
     })
 }
 
-const activityDots = document.querySelectorAll('.activity .year .dots .dot')
+const activityDots = document.querySelectorAll('.activity .year [data-date]')
 if (activityDots.length) {
     activityDots.forEach(dot => {
         let date = dot.dataset.date
