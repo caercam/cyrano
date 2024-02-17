@@ -1,7 +1,7 @@
 <?php get_header(); ?>
       <article id="<?php the_ID(); ?>" <?php post_class(); ?>>
         <div class="post-thumbnail">
-          <?php the_post_thumbnail( 'original' ); ?>
+          <?php the_post_thumbnail( [ 960, 360 ] ); ?>
         </div>
         <div class="post-title">
           <?php the_title(); ?>

@@ -2,7 +2,7 @@
         <article id="<?php the_ID(); ?>" <?php post_class(); ?>>
           <div class="post-thumbnail">
             <a href="<?php the_permalink(); ?>">
-              <?php the_post_thumbnail( 'original' ); ?>
+              <?php the_post_thumbnail( [ 960, 360 ] ); ?>
             </a>
           </div>
 <?php if ( 'status' === get_post_format() ) : ?>
