@@ -21,6 +21,23 @@ if (searchToggle) {
     })
 }
 
+const watchlistToggle = document.querySelectorAll('.watchlists-toggle')
+if (watchlistToggle.length) {
+    watchlistToggle.forEach(toggle => {
+        toggle.classList.toggle('active', localStorage.getItem('showWatchlists') !== null)
+        toggle.addEventListener('click', (event) => {
+            event.preventDefault()
+            if (toggle.classList.contains('active')) {
+                toggle.classList.remove('active')
+                localStorage.removeItem('showWatchlists')
+            } else {
+                toggle.classList.add('active')
+                localStorage.setItem('showWatchlists', ':)')
+            }
+        })
+    })
+}
+
 const activityDots = document.querySelectorAll('.activity .year [data-date]')
 if (activityDots.length) {
     activityDots.forEach(dot => {

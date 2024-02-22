@@ -24,4 +24,6 @@ if ( ( ! is_home() || ! is_sticky() ) && ( ! isset( $current ) || $current !== g
     }
 ?>
         <div class="marker"><span><a href="<?php echo esc_url( $url ); ?>"><?php echo $date; ?></a></span></div>
-<?php endif; ?>
+<?php
+  get_template_part( 'template-parts/timeline/watchlists' );
+endif;

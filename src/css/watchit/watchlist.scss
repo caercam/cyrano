@@ -1,0 +1,13 @@
+.wp-block-watchit-watchlist {
+  .movies {
+    .movie {
+      .details {
+        @apply gap-0.5 bg-cyrano-navy/[.8] leading-4 p-4;
+
+        .title {
+          @apply mb-1;
+        }
+      }
+    }
+  }
+}

@@ -454,6 +454,33 @@ function get_month_graph( $year, $month ) {
 }
 
 /**
+ * Retrieves the watchlists for a given month and year.
+ * 
+ * @since 2.4.0
+ *
+ * @param int $year The year for which to retrieve the post data.
+ * @param int $month The month for which to retrieve the post data.
+ * @return array An array of posts containing the watchlists for the given month and year.
+ */
+function get_watchlists_for_the_month( $year = null, $month = null ) {
+
+    $year = $year ?? get_the_date( 'Y' );
+    $month = $month ?? get_the_date( 'n' );
+
+    $watchlists = get_posts( [
+        'post_type' => 'watchlist',
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'date_query' => [
+            'year' => $year,
+            'month' => $month,
+        ],
+    ] );
+
+    return $watchlists;
+}
+
+/**
  * Retrieves the total number of posts per day for a given month and year.
  * 
  * @since 2.2.0
