@@ -1,5 +1,5 @@
 
-        <article id="<?php the_ID(); ?>" <?php post_class(); ?>>
+        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
           <div class="post-thumbnail">
             <a href="<?php the_permalink(); ?>">
               <?php the_post_thumbnail( [ 960, 360 ] ); ?>
