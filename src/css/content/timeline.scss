@@ -70,10 +70,10 @@
       }
 
       .post {
-        @apply relative w-full md:w-1/2 flex flex-col bg-cyrano-light md:bg-transparent my-8 py-4 md:py-0;
+        @apply relative w-full md:w-1/2 md:min-h-[14rem] flex flex-col bg-cyrano-light md:bg-transparent mb-8 py-4 md:py-0;
 
         img {
-          @apply w-full aspect-video object-cover rounded shadow opacity-80 transition-opacity duration-300;
+          @apply w-full aspect-video object-cover rounded shadow md:opacity-90 transition-opacity duration-300;
         }
 
         &.format-status {
@@ -125,11 +125,11 @@
           .post-title,
           .post-content,
           .post-excerpt {
-            @apply md:text-left;
+            @apply md:text-right;
           }
 
           .post-meta {
-            @apply md:justify-start;
+            @apply md:justify-end;
           }
         }
 
@@ -137,22 +137,22 @@
           .post-title,
           .post-content,
           .post-excerpt {
-            @apply md:text-right;
+            @apply md:text-left;
           }
 
           .post-meta {
-            @apply md:justify-end;
+            @apply md:justify-start;
 
             .post-date {
-              @apply order-2;
+              @apply order-1;
             }
 
             .post-rating {
-              @apply order-1;
+              @apply order-2;
 
               .stars {
                 &::before {
-                  @apply left-auto -right-3;
+                  @apply right-auto -left-3;
                 }
               }
             }
@@ -194,16 +194,7 @@
         }
 
         &:nth-child(even) {
-          @apply clear-left float-left md:pr-8 mt-12 md:mt-8;
-
-          &::after,
-          &::before {
-            @apply -right-[5px];
-          }
-        }
-
-        &:nth-child(odd) {
-          @apply clear-right float-right md:pl-8 mt-16;
+          @apply float-right md:pl-8 /*mt-12 md:mt-8*/;
 
           &::after,
           &::before {
@@ -211,8 +202,25 @@
           }
         }
 
+        &:nth-child(odd) {
+          @apply float-left md:pr-8 /*mt-16*/;
+
+          &::after,
+          &::before {
+            @apply -right-[5px];
+          }
+        }
+
+        &:nth-of-type(1) {
+          @apply md:mt-8;
+        }
+
+        &:nth-of-type(2) {
+          @apply md:mt-24;
+        }
+
         &:first-child {
-          @apply mt-4;
+          /*@apply mt-4;*/
         }
       }
     }
