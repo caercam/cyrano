@@ -52,6 +52,8 @@ final class Cyrano {
     add_filter( 'pre_get_posts',       [ $this, 'pre_get_posts' ] );
 
     add_filter( 'block_type_metadata_settings', [ $this, 'custom_cinemarathons_block_templates' ], 10, 2 );
+
+    add_filter( 'render_block', [ $this, 'maybe_remove_critic_block' ], 10, 2 );
   }
 
   /**
@@ -233,6 +235,33 @@ final class Cyrano {
     }
 
     return $settings;
+  }
+
+  /**
+   * Conditionally remove 'roxane/critic' block from content.
+   * 
+   * @since 2.5.0
+   * @access public
+   * 
+   * @param  string $block_content
+   * @param  array  $block
+   * @return string
+   */
+  public function maybe_remove_critic_block( $block_content, $block ) {
+
+    if ( 'status' !== get_post_format() ) {
+      return $block_content;
+    }
+
+    if ( is_single() ) {
+      return $block_content;
+    }
+
+    if ( 'roxane/critic' === $block['blockName'] ) {
+      return '';
+    }
+
+    return $block_content;
   }
 
   /**

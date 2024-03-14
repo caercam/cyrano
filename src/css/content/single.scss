@@ -151,6 +151,14 @@
         }
       }
 
+      .post.format-status {
+        .post-content {
+          & > p:first-child {
+            @apply relative text-center;
+          }
+        }
+      }
+
       .post.category-series.format-status {
         .post-content {
           a {
