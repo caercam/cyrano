@@ -12,7 +12,7 @@
           <div class="post-meta">
             <span class="post-date" title="<?php echo esc_attr( get_the_date( '\l\e j F Y \à H \h i' ) ); ?>"><?php echo 'il y a ' . human_time_diff( get_the_date( 'U' ), current_time( 'timestamp' ) ); ?></span>
 <?php if ( has_term( taxonomy: 'rating' ) ) : ?>
-            <span class="post-rating"><?php echo get_the_rating(); ?></span>
+            <span class="post-rating"><?php echo \roxane\support\get_the_rating(); ?></span>
 <?php endif; ?>
           </div>
 <?php else : ?>
