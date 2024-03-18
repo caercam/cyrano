@@ -137,7 +137,7 @@
     }
 
     .item-title {
-      @apply text-base leading-4 truncate overflow-x-auto overflow-y-visible;
+      @apply h-full flex items-center text-base leading-4 truncate overflow-x-auto overflow-y-visible;
     }
 
     .item-availability,
