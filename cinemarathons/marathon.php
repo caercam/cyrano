@@ -77,13 +77,14 @@ foreach ( $data['movies'] as $movie ) :
                     <span class="item-status<?php echo esc_attr( $status ); ?>"><?php the_theme_svg( $icon ); ?></span>
                     <span class="item-availability<?php echo esc_attr( $availability ); ?>"><?php the_theme_svg( $movie['available'] ? 'dvd-check': 'dvd-no' ); ?></span>
 <?php if ( ! empty( $movie['post_id'] ) ) : ?>
-                    <a class="item-title" href="<?php echo esc_html( get_permalink( $movie['post_id'] ) ); ?>"><?php echo esc_html( $movie['title'] ); ?></a>
+                    <a class="item-title" href="<?php echo esc_html( get_permalink( $movie['post_id'] ) ); ?>"><?php echo esc_html( $movie['title'] ); ?><?php the_theme_svg( 'link' ); ?></a>
 <?php else : ?>
                     <span class="item-title"><?php echo esc_html( $movie['title'] ); ?></span>
 <?php endif; ?>
                 </li>
 <?php endforeach; ?>
             </ul>
+<?php if ( 0 < count( $data['bonuses'] ) ) : ?>
             <h3>Bonus</h3>
             <p>Films à voir en bonus. Ne font pas partie du marathon à proprement parler, mais offre une satisfaction supplémentaire.</p>
             <ul>
@@ -106,6 +107,7 @@ foreach ( $data['bonuses'] as $movie ) :
                 </li>
 <?php endforeach; ?>
             </ul>
+<?php endif; ?>
         </div>
     </div>
 </div>

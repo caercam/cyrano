@@ -56,11 +56,15 @@
       @apply bg-cyrano-light/[.75] text-sm p-8 my-4 md:-ml-4;
 
       h1, h2, h3, h4, p {
-        @apply mb-2 mt-0 !important
+        @apply mb-2 mt-4 !important;
+
+        &:first-child {
+          @apply mt-0 !important;
+        }
       }
 
       ul {
-        @apply pl-0 ml-0 !important;
+        @apply pl-0 ml-0 mb-0 !important;
 
         li {
           @apply list-disc flex items-center gap-1;
@@ -101,21 +105,39 @@
           &::after {
             @apply content-[''] absolute -left-[calc(2.25rem+1px)] md:-left-[calc(2.75rem+1px)] top-[calc(.625rem+1px)] w-2.5 h-2.5 bg-cyrano-light border-2 border-cyrano-blue ring ring-cyrano-light rounded-full z-10;
           }
+
+          a {
+            @apply flex gap-x-1 text-cyrano-navy hover:text-cyrano-blue delay-0 !important;
+
+            &::before {
+              @apply hidden
+            }
+
+            svg {
+              @apply w-3.5 h-3.5 fill-cyrano-navy transition-all duration-300;
+            }
+
+            &:hover {
+              svg {
+                @apply fill-cyrano-blue transition-all duration-200;
+              }
+            }
+          }
+
+          .item-status,
+          .item-availability {
+            @apply relative;
+    
+            &::after {
+              @apply content-[''] md:absolute -right-5 top-1/2 w-2 h-px bg-cyrano-blue;
+            }
+          }
         }
       }
     }
 
-    .item-availability,
     .item-title {
-      @apply relative;
-
-      &::before {
-        @apply content-[''] md:absolute -left-5 top-1/2 w-2 h-px bg-cyrano-blue;
-      }
-    }
-
-    .item-title {
-      @apply text-base leading-4 truncate
+      @apply text-base leading-4 truncate overflow-x-auto overflow-y-visible;
     }
 
     .item-availability,

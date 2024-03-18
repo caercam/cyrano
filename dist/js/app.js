@@ -1,1 +1,63 @@
-(()=>{document.addEventListener("DOMContentLoaded",()=>{let l=document.querySelector(".nav-toggle");l&&l.addEventListener("click",e=>{e.preventDefault();let t=document.querySelector(".navigation");t&&t.classList.toggle("active")});let a=document.querySelector(".search-toggle");a&&a.addEventListener("click",e=>{e.preventDefault();let t=document.querySelector(".search-form");t&&t.classList.toggle("active")});let s=document.querySelectorAll(".watchlists-toggle");s.length&&s.forEach(e=>{e.classList.toggle("active",localStorage.getItem("showWatchlists")!==null),e.addEventListener("click",t=>{t.preventDefault(),e.classList.contains("active")?(e.classList.remove("active"),localStorage.removeItem("showWatchlists")):(e.classList.add("active"),localStorage.setItem("showWatchlists",":)"))})});let o=document.querySelectorAll(".activity .year [data-date]");if(o.length&&o.forEach(e=>{let t=e.dataset.date;t&&e.addEventListener("click",()=>window.location.href=`/${t.replaceAll("-","/")}`)}),960<=document.body.clientWidth){let e=document.querySelectorAll(".timeline .post");if(e.length){let t=e[0].parentElement;e.forEach(c=>{c.offsetLeft<Math.round(t.offsetWidth/2)?c.classList.add("column-left"):c.classList.add("column-right")})}}});})();
+(() => {
+  // src/js/app.js
+  document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.querySelector(".nav-toggle");
+    if (navToggle) {
+      navToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        const nav = document.querySelector(".navigation");
+        if (nav) {
+          nav.classList.toggle("active");
+        }
+      });
+    }
+    const searchToggle = document.querySelector(".search-toggle");
+    if (searchToggle) {
+      searchToggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        const search = document.querySelector(".search-form");
+        if (search) {
+          search.classList.toggle("active");
+        }
+      });
+    }
+    const watchlistToggle = document.querySelectorAll(".watchlists-toggle");
+    if (watchlistToggle.length) {
+      watchlistToggle.forEach((toggle) => {
+        toggle.classList.toggle("active", localStorage.getItem("showWatchlists") !== null);
+        toggle.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (toggle.classList.contains("active")) {
+            toggle.classList.remove("active");
+            localStorage.removeItem("showWatchlists");
+          } else {
+            toggle.classList.add("active");
+            localStorage.setItem("showWatchlists", ":)");
+          }
+        });
+      });
+    }
+    const activityDots = document.querySelectorAll(".activity .year [data-date]");
+    if (activityDots.length) {
+      activityDots.forEach((dot) => {
+        let date = dot.dataset.date;
+        if (date) {
+          dot.addEventListener("click", () => window.location.href = `/${date.replaceAll("-", "/")}`);
+        }
+      });
+    }
+    if (960 <= document.body.clientWidth) {
+      const timelineItems = document.querySelectorAll(".timeline .post");
+      if (timelineItems.length) {
+        const timelineElement = timelineItems[0].parentElement;
+        timelineItems.forEach((item) => {
+          if (item.offsetLeft < Math.round(timelineElement.offsetWidth / 2)) {
+            item.classList.add("column-left");
+          } else {
+            item.classList.add("column-right");
+          }
+        });
+      }
+    }
+  });
+})();
