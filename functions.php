@@ -140,7 +140,9 @@ final class Cyrano {
    */
   private function register_scripts() {
 
-    wp_register_script( 'cyrano-script', get_theme_file_uri( '/dist/js/app.js' ), [], wp_get_theme()->get( 'Version' ), true );
+    wp_register_script( 'chartist', 'https://cdn.jsdelivr.net/npm/chartist@1.3.0/dist/index.umd.min.js', [], '1.3.0', true );
+
+    wp_register_script( 'cyrano-script', get_theme_file_uri( '/dist/js/app.js' ), [ 'chartist' ], wp_get_theme()->get( 'Version' ), true );
   }
 
   /**
@@ -151,7 +153,9 @@ final class Cyrano {
    */
   private function register_styles() {
 
-    wp_register_style( 'cyrano-style', get_stylesheet_uri(), [], wp_get_theme()->get( 'Version' ) );
+    wp_register_style( 'chartist', 'https://cdn.jsdelivr.net/npm/chartist@1.3.0/dist/index.min.css', [], '1.3.0' );
+
+    wp_register_style( 'cyrano-style', get_stylesheet_uri(), [ 'chartist' ], wp_get_theme()->get( 'Version' ) );
   }
 
   /**

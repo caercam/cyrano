@@ -64,4 +64,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    document.querySelectorAll('[data-chartist]')?.forEach(chart => {
+        if (chart?.dataset?.chartist) {
+            let data = localStorage.getItem(chart.dataset.chartist);
+            if (data) {
+                data = JSON.parse(data);
+                new Chartist.LineChart(chart, {
+                    labels: data.labels,
+                    series: data.series
+                }, {
+                    axisY: {
+                        offset: 20,
+                    },
+                    chartPadding: {
+                        left: 0,
+                    },
+                    height: '200px',
+                    low: 0,
+                    showArea: true,
+                    // reverseData: true,
+                });
+            }
+        }
+    });
 });

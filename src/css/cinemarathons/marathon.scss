@@ -80,12 +80,35 @@
           }
         }
       }
+
+      .stars {
+        @apply flex items-center;
+
+        svg {
+          @apply w-3.5 h-3.5 fill-cyrano-blue;
+        }
+      }
+
+      .ct-chart-line {
+        .ct-series {
+          &.ct-series-a {
+            .ct-area {
+              @apply fill-cyrano-blue;
+            }
+
+            .ct-line,
+            .ct-point {
+              @apply stroke-cyrano-blue
+            }
+          }
+        }
+      }
     }
 
     .items {
 
       ul {
-        @apply relative bg-cyrano-light text-cyrano-dark py-4 my-8 -ml-12 md:-ml-20;
+        @apply relative overflow-x-auto md:overflow-hidden flex flex-col flex-wrap md:flex-nowrap bg-cyrano-light text-cyrano-dark py-4 my-8 -ml-12 md:-ml-20;
 
         &::before {
           @apply content-[''] absolute inset-y-0 w-0.5 bg-cyrano-blue -ml-px;
@@ -96,7 +119,7 @@
         }
 
         li {
-          @apply relative h-8 list-none flex items-center gap-4 md:gap-8 ml-8 md:ml-[calc(4.5rem-2px)];
+          @apply relative md:w-[calc(100%-4.5rem)] h-8 list-none flex items-center gap-4 md:gap-8 ml-8 md:ml-[calc(4.5rem-2px)];
 
           &::before {
             @apply content-[''] absolute -left-6 md:-left-8 top-4 w-4 h-0.5 bg-cyrano-blue -mt-px
@@ -107,7 +130,7 @@
           }
 
           a {
-            @apply flex gap-x-1 text-cyrano-navy hover:text-cyrano-blue delay-0 !important;
+            @apply flex gap-x-1 flex-shrink-0 text-cyrano-navy hover:text-cyrano-blue delay-0 !important;
 
             &::before {
               @apply hidden
@@ -124,12 +147,38 @@
             }
           }
 
+          .rating {
+            @apply relative w-full flex items-center justify-end mr-6;
+
+            &::before {
+              @apply content-[''] absolute -left-4 right-20 top-1/2 h-px bg-cyrano-navy/[.125] translate-y-px;
+            }
+
+            .stars {
+              @apply flex items-center;
+  
+              svg {
+                @apply w-3.5 h-3.5 fill-cyrano-blue transition-colors duration-300;
+              }
+            }
+          }
+
           .item-status,
           .item-availability {
             @apply relative;
     
             &::after {
               @apply content-[''] md:absolute -right-5 top-1/2 w-2 h-px bg-cyrano-blue;
+            }
+          }
+
+          &:hover {
+            .rating {
+              .stars {
+                svg {
+                  @apply fill-cyrano-orange transition-colors duration-300;
+                }
+              }
             }
           }
         }

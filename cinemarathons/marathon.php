@@ -19,6 +19,34 @@ if ( ! empty( $attributes['movies'] ) ) {
 
 $data['bonuses'] = wp_filter_object_list( $attributes['movies'] ?? [], [ 'bonus' => 1 ] );
 $data['movies'] = wp_filter_object_list( $attributes['movies'] ?? [], [ 'bonus' => 0 ] );
+
+$data['posts'] = wp_list_pluck( $data['movies'], 'post_id' );
+$data['posts'] = array_filter( $data['posts'] );
+
+$data['ratings'] = [];
+$data['results'] = [
+    '0.0' => 0,
+    '0.5' => 0,
+    '1.0' => 0,
+    '1.5' => 0,
+    '2.0' => 0,
+    '2.5' => 0,
+    '3.0' => 0,
+    '3.5' => 0,
+    '4.0' => 0,
+    '4.5' => 0,
+    '5.0' => 0,
+];
+
+foreach ( $data['posts'] as $post_id ) {
+    if ( has_term( taxonomy: 'rating', post: $post_id ) ) {
+        $ratings = get_the_terms( $post_id, 'rating' );
+        if ( is_array( $ratings ) && count( $ratings ) && $ratings[0] instanceof \WP_Term ) {
+            $data['ratings'][ $post_id ] = $ratings[0]->name;
+            $data['results'][ $ratings[0]->name ]++;
+        }
+    }
+}
 ?>
 <div <?php echo get_block_wrapper_attributes( [ 'id' => $attributes['anchor'] ?? $attributes['id'] ?? '' ] ); ?>>
     <div class="marathon-header">
@@ -49,6 +77,15 @@ $data['movies'] = wp_filter_object_list( $attributes['movies'] ?? [], [ 'bonus' 
             <h3>Commentaires</h3>
             <?php echo wpautop( esc_html( $attributes['comments'] ) ); ?>
 <?php endif; ?>
+<?php if ( $data['current'] === $data['total'] ) : ?>
+            <h3>Résultats</h3>
+            <p>Note moyenne : <?php echo round( array_sum( $data['ratings'] ) / count( $data['ratings'] ), 1 ); ?></p>
+            <div data-chartist="marathonData<?php the_ID(); ?>"></div>
+            <script>localStorage.setItem('marathonData<?php the_ID(); ?>', '<?php echo json_encode( [
+                'labels' => array_keys( $data['results'] ),
+                'series' => [ array_values( $data['results'] ) ],
+            ] ) ;?>' );</script>
+<?php endif; ?>
         </div>
         <h3>Liste complète</h3>
         <p><?php
@@ -78,6 +115,9 @@ foreach ( $data['movies'] as $movie ) :
                     <span class="item-availability<?php echo esc_attr( $availability ); ?>"><?php the_theme_svg( $movie['available'] ? 'dvd-check': 'dvd-no' ); ?></span>
 <?php if ( ! empty( $movie['post_id'] ) ) : ?>
                     <a class="item-title" href="<?php echo esc_html( get_permalink( $movie['post_id'] ) ); ?>"><?php echo esc_html( $movie['title'] ); ?><?php the_theme_svg( 'link' ); ?></a>
+<?php if ( has_term( taxonomy: 'rating', post: $movie['post_id'] ) ) : ?>
+                    <div class="rating"><?php echo \roxane\support\get_the_rating( $movie['post_id'] ); ?></div>
+<?php endif; ?>
 <?php else : ?>
                     <span class="item-title"><?php echo esc_html( $movie['title'] ); ?></span>
 <?php endif; ?>
@@ -100,7 +140,7 @@ foreach ( $data['bonuses'] as $movie ) :
                     <span class="item-status<?php echo esc_attr( $status ); ?>"><?php the_theme_svg( $icon ); ?></span>
                     <span class="item-availability<?php echo esc_attr( $availability ); ?>"><?php the_theme_svg( $movie['available'] ? 'dvd-check': 'dvd-no' ); ?></span>
 <?php if ( ! empty( $movie['post_id'] ) ) : ?>
-                    <a class="item-title" href="<?php echo esc_html( get_permalink( $movie['post_id'] ) ); ?>"><?php echo esc_html( $movie['title'] ); ?></a>
+                    <a class="item-title" href="<?php echo esc_html( get_permalink( $movie['post_id'] ) ); ?>"><?php echo esc_html( $movie['title'] ); ?><?php the_theme_svg( 'link' ); ?></a>
 <?php else : ?>
                     <span class="item-title"><?php echo esc_html( $movie['title'] ); ?></span>
 <?php endif; ?>
